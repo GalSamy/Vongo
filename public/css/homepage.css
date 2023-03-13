@@ -1,0 +1,14 @@
+.navtext{
+    font-size: 0.5rem;
+}
+.navbar{
+    padding : 0;
+}
+
+.main-text{
+    color: #DE681D;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 2rem;
+}
