@@ -1,0 +1,9 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+.profile{
+    float: left;
+}
+.profile-img{
+    border-radius: 50%;
+}
