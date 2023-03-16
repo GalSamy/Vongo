@@ -1,9 +1,7 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
-.navtext{
-    font-size: 1.5rem;
-}
+
 .navbar{
     padding : 0;
 }
@@ -28,4 +26,5 @@
 .record-img{
     width:30vw;
 }
+
 

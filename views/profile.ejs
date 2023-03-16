@@ -10,9 +10,34 @@
 </head>
 <body>
     <%- include('partials/_nav') %>
-    <div class="profile">
-    <img src="../../assets/Question_mark_(black).png" class="profile-img">
+    <div class="profile m-4">
+        <div class="profile-info">
+    <img src="/assets/profile%20stock%201.png" class="profile-img">
+            <p class="m-1"> Mark Robert</p>
+            <p class="location m-1">Rishon Lezion,Israel</p>
+        </div>
+        <div class="activities d-block">
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item d-flex justify-content-between align-items-start" id="sells">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Sells</div>
+                        Active Sells
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start " id="orders">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Orders</div>
+                        Previous Orders
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+            </ol>
+
+        </div>
+
     </div>
     <div class="data"></div>
+<script src="/scripts/profile.js"></script>
 </body>
 </html>

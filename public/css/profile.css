@@ -1,9 +1,25 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
+.activities{
+    font-size: 0.5rem;
+}
+.profile-info{
+    font-size: 0.75rem;
+}
+.location{
+    font-size: 0.5rem;
+}
 .profile{
     float: left;
 }
 .profile-img{
     border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+}
+.list-group-item{
+}
+.list-group-item:hover{
+    cursor: pointer;
 }
