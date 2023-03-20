@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/signin.css" rel="stylesheet">
+
+    <title>Profile</title>
+</head>
+<body>
+<%- include('partials/_nav') %>
+    <div class="content">
+<div class="p-1 float-start w-100">
+    <p class="h1 fw-bolder">Login:</p>
+    <form class="fs-3">
+        <div class="row mb-3">
+            <label for="inputEmail3" class="col-sm-2 col-form-label pt-0 m-1 fw-bold">Username:</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="inputEmail3">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputPassword3" class="col-sm-2 col-form-label pt-0 m-1 fw-bold">Password:</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword3">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary m-1">Sign in</button>
+        <button type="submit" class="btn btn-primary m-1">Sign up</button>
+
+    </form>
+</div>
+    </div>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Vinyl_record.svg/256px-Vinyl_record.svg.png" class="d-inline record-img">
+
+</body>
+</html>
