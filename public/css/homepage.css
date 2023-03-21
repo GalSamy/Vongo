@@ -32,22 +32,25 @@ html, body {
     position: absolute;
     overflow :hidden;
 }
-.row-headers{
-    position: relative;
-}
 .sell-txt{
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
-    
+    font-size: 2.7rem;
     font-weight: 600;
+    opacity: 0.6;
+
 }
 .explore-txt{
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
     font-weight: 600;
+    font-size: 2.7rem;
+    opacity: 0.6;
 }
 .up {
     transform: translateY(-2vh);
+    opacity: 1;
+    letter-spacing: 0.1rem;
   }
 
 .record-img {

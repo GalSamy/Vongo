@@ -1,5 +1,5 @@
 *{
-    color : black !important;
+    font-family: 'Montserrat', sans-serif;
 }
 body{
     height: 100vh;
@@ -9,18 +9,16 @@ body{
     background-color: #DE681D !important;
     border: none !important;
 }
-
+.container{
+}
+.logo{
+    font-size: 5rem;
+    font-weight: 600;
+}
+.form-outline{
+    font-size: 1.2rem;
+}
 .record-img{
     position: absolute;
-    width: 60vh;
-    display: inline;
-    right: -25vh;
-    transition: all 0.8s ease-in-out;
-    transform-origin:50%;
 }
-.record-img:hover{
-    -webkit-transform : rotate(180deg) scale(1.1); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform     : rotate(180deg) scale(1.1); /* IE 9 */
-    transform         : rotate(180deg) scale(1.1); /* Firefox 16+, IE 10+, Opera */
 
-}
