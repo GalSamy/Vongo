@@ -4,7 +4,7 @@ const app = express()
 app.set('view engine', 'ejs')
 
 app.use('/', require('./routes/router'))
-app.use(express.static("public"))
+app.use(express.static(__dirname + '/public'));
 
 var liveServer = require("live-server");
 app.get("/", (req, res) => {

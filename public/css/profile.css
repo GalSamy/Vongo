@@ -22,3 +22,9 @@
 .list-group-item:hover{
     cursor: pointer;
 }
+.profile-img {
+    width: 50%;
+    height: 50%;
+    max-width: 250px;
+    max-height: 250px;
+}
