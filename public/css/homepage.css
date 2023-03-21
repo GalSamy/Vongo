@@ -1,40 +1,61 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 .main-text{
     margin-left:25% ;
-    margin-top: 7%;
+    margin-top: 10vh;
     color: #DE681D;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: 5vw;
+    font-size:clamp(2.5rem,4vw + 1.5rem,10rem);
 
 }
+@media (max-width: 1000px) {
+    .records-row{
+        padding:0;
+        margin: 0;
+        bottom: 0;
+        height:43%;
+        position: relative;
+        overflow :hidden;
+    }
+}
 .records-row{
-    padding:0;
     margin: 0;
     bottom: 0;
     height:43%;
+    padding-top: 2%;
     position: absolute;
-    overflow-y :hidden;
+    overflow :hidden;
 }
-.record-img:hover{
-    -webkit-transform : rotate(180deg) scale(1.1); /* Chrome, Opera 15+, Safari 3.1+ */
-    -ms-transform     : rotate(180deg) scale(1.1); /* IE 9 */
-    transform         : rotate(180deg) scale(1.1); /* Firefox 16+, IE 10+, Opera */
-
+.row-headers{
+    position: relative;
 }
-.record-img {
-    margin-top:2%;
+.sell-txt{
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
-    height:60vh;
+    
+    font-weight: 600;
 }
+.explore-txt{
+    transition: all 0.8s ease-in-out;
+    transform-origin:50%;
+    font-weight: 600;
+}
+.up {
+    transform: translateY(-2vh);
+  }
 
-.buy p{
-    font-weight: 600;
+.record-img {
+    transition: all 0.8s ease-in-out;
+    transform-origin:50%;
+    height:40vw;
 }
-.sell p{
-    font-weight: 600;
+p{
+    font-size: 2rem;
 }
 

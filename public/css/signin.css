@@ -12,22 +12,12 @@ body{
 
 .record-img{
     position: absolute;
-    width: 20%;
-    height: 40%;
+    width: 60vh;
     display: inline;
-    right: -120px;
+    right: -25vh;
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
 }
-.content{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10%;
-    width: 50%;
-
-}
-
 .record-img:hover{
     -webkit-transform : rotate(180deg) scale(1.1); /* Chrome, Opera 15+, Safari 3.1+ */
     -ms-transform     : rotate(180deg) scale(1.1); /* IE 9 */

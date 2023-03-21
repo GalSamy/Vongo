@@ -1,5 +1,9 @@
 
-.navtext{
-    font-size:1rem;
+.navbar{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
 }
-
+.navbar-brand{
+    font-weight:600;
+    font-size: 1.5rem;
+}
