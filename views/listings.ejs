@@ -55,7 +55,7 @@
             <p class="card-text fs-5"><%= Items.listings[i].artist %>, <%= Items.listings[i].year %></p>
             <ul>
                 <li>
-                    Listed By <a class="link" href="http://localhost:8080/users/<%=Items.listings[i].listedBy.userId %>"><%= Items.listings[i].listedBy.userName %> </a>
+                    Listed By <a class="link" href="http://localhost:8080/users/<%=Items.listings[i].listedBy._id %>"><%= Items.listings[i].listedBy.userName %> </a>
                 </li>
                 <li>
                     Last Bid : <%= Items.listings[i].lastBid %>
