@@ -11,7 +11,7 @@ var liveServer = require("live-server");
 app.get("/", (req, res) => {
     res.render("./views/homepage.ejs"); // replace "index" with the name of your EJS file
   });
-mongoose.connect('mongodb+srv://gal:12341234@vongo.bl15wmi.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://tal:12341234@vongo.bl15wmi.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connection.on("connected", ()=>{
   console.log("connected")
 })
