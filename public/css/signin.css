@@ -10,6 +10,9 @@ body{
     border: none !important;
 }
 .container{
+    padding:5%;
+    background-color: #e2e2e2;
+    border-radius: 4%;
 }
 .logo{
     font-size: 5rem;
