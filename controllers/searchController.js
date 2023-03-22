@@ -1,3 +1,5 @@
+const {Listings} = require("../models/listingModel")
+
 let listedBy = {
     userPhoto: "/assets/IMG_1154.jpg",
     userId: "123",
@@ -16,13 +18,15 @@ let exItem = {
     lastBid: "30$",
     id: 0
 }
-let listings = []
-for (let i = 0; i<9; i++){
-    listings.push(exItem)
-}
+//let listings = []
+//for (let i = 0; i<9; i++){
+//    listings.push(exItem)
+//}
 
 
- search = (req,res) => {
+ search = async (req,res) => {
+    const listings =await Listings.find({})
+     console.log(listings)
     res.render('../views/listings.ejs', {Items:{listings}});
 }
 const listing = (req,res) => {

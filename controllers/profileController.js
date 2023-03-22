@@ -1,5 +1,4 @@
-//  const users = [];
-//  let user = users.get(req.params.userid)
+const {Users} = require("../models/userModel")
 let user = {
     userPhoto: "/assets/profile%20stock%201.png",
     userId: "456",
@@ -19,7 +18,6 @@ let CurrentUser = {
 let users = [user,CurrentUser]
 const profile = (req,res) => {
     const resp = users.filter(u => u.userId === req.params.userid)
-    console.log(resp)
     if (req.params.userid === "@me") // /users/@me is the profile page
     {
         res.render('../views/profile.ejs', {User:CurrentUser});
