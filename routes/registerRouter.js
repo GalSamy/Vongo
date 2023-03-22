@@ -6,3 +6,5 @@ registerRouter.get("/", register)
 module.exports ={
     registerRouter
 }
+
+registerRouter.post("/createUser")
