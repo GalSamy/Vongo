@@ -34,6 +34,10 @@ const listing = (req,res) => {
    // item = items.get(listingId)
     res.render('../views/listing.ejs', {Item:{listingId}});
 }
+
+const newListing = (req,res)=>{
+    res.render("../views/newListing.ejs");
+}
 module.exports = {
-    search,listing
+    search,listing,newListing
 }

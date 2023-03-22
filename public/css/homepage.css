@@ -6,32 +6,32 @@ html, body {
     overflow-x: hidden;
 }
 .main-text{
-    position: relative;
     margin-left:25% ;
     margin-top: 10vh;
     color: #DE681D;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size:clamp(2rem,3vw + 1.5rem,10rem);
+    font-size:clamp(2.5rem,4vw + 1.5rem,10rem);
 
 }
-@media (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .records-row{
         padding:0;
         margin: 0;
         bottom: 0;
         height:43%;
         position: relative;
-        overflow :visible;
+        overflow :visible !important;
+        overflow-y: visible !important ;
     }
 }
 .records-row{
     margin: 0;
     bottom: 0;
     height:43%;
-    padding-top: 2%;
     position: absolute;
-    overflow :hidden;
+    padding-top: 2%;
+    overflow: hidden;
 }
 .sell-txt{
     transition: all 0.8s ease-in-out;
@@ -41,6 +41,7 @@ html, body {
     opacity: 0.6;
 
 }
+
 .explore-txt{
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
