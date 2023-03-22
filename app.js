@@ -1,8 +1,9 @@
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
+const cookieParser = require('cookie-parser')
 app.set('view engine', 'ejs')
-
+app.use(cookieParser());
 app.use('/', require('./routes/router'))
 app.use(express.static(__dirname + '/public'));
 
