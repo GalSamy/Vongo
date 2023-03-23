@@ -1,5 +1,6 @@
 const main = async () => {
     let resp;
+
     const dataList = $("#datalistOptions")[0]
     let res = await fetch("https://countriesnow.space/api/v0.1/countries")
     res = await res.json()

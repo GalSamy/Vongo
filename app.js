@@ -19,9 +19,8 @@ app.get("/", (req, res) => {
   });
 mongoose.connect(process.env.CONNECTION_STRING);
 mongoose.connection.on("connected", ()=>{
-  console.log("connected")
+  console.log("connected to DB")
 })
-  app.listen(8080)
-  app.on("ready", ()=> {
+  app.listen(8080, ()=>{
     console.log("listening port 8080")
   })
