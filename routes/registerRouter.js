@@ -1,19 +1,14 @@
 const express = require("express")
-const {register} = require("../controllers/registerController");
+
+const {register, user_creation_handler} = require("../controllers/registerController");
 const { userModel } = require("../models/userModel");
+const bodyParser = require("body-parser");
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
 const registerRouter = express.Router()
 
 registerRouter.get("/", register)
-
-
-registerRouter.post("/createUser",function(req,res){
-    const UserCreds = new userModel({
-        userName:req.body.userName,
-        email:req.body.email,
-        passwordHash:req.hash
-    });
-    UserCreds.save();
-})
+registerRouter.post("/createUser",urlencodedParser,user_creation_handler)
 module.exports ={
     registerRouter
 }
