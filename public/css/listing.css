@@ -1,0 +1,11 @@
+.clink{
+    color: #DE681D !important;
+    text-decoration : none !important;
+}
+.btn-primary{
+    background-color: #DE681D !important;
+    border: none !important;
+}
+.audio{
+    max-width: 10rem;
+}
