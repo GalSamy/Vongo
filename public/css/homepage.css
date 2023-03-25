@@ -4,6 +4,7 @@
 html, body {
     max-width: 100%;
     overflow-x: hidden;
+    background-color: #F2E2CE !important;
 }
 .main-text{
     margin-left:25% ;
@@ -28,7 +29,7 @@ html, body {
 .records-row{
     margin: 0;
     bottom: 0;
-    height:43%;
+    height:49%;
     position: absolute;
     padding-top: 2%;
     overflow: hidden;
@@ -36,7 +37,7 @@ html, body {
 .sell-txt{
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
-    font-size: 2.7rem;
+    font-size: 3.3rem;
     font-weight: 600;
     opacity: 0.6;
 
@@ -46,7 +47,7 @@ html, body {
     transition: all 0.8s ease-in-out;
     transform-origin:50%;
     font-weight: 600;
-    font-size: 2.7rem;
+    font-size: 3.3rem;
     opacity: 0.6;
 }
 .up {

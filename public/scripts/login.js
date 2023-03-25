@@ -1,19 +1,15 @@
 $(document).ready(function() {
     $('button[type="button"]').click(function() {
-      var username = $('#username_input').val();
       var email = $('#email_input').val();
       var password = $('#password_input').val();
-      var location = $('#location_input').val();
       var hashValue = CryptoJS.MD5(email+''+password).toString();
       console.log(hashValue)
       $.ajax({
         url: '/register/createUser',
         type: 'POST',
         data:{
-            username: username,
             email: email,
             password_hash: hashValue,
-            location: location
         },
         contentType:"application/x-www-form-urlencoded",
         dataType:"json",
