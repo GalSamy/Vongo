@@ -1,10 +1,18 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser")
+<<<<<<< HEAD
 const crypto = require('crypto-js')
 const app = express()
 require("dotenv").config()
 app.set('view engine', 'ejs')
+=======
+const cors = require("cors")
+const app = express()
+require("dotenv").config()
+app.set('view engine', 'ejs')
+app.use(cors())
+>>>>>>> refs/remotes/origin/master
 app.use('/', require('./routes/router'))
 app.use(express.static(__dirname + '/public'));
 //app.use(express.urlencoded({ extended: true }))
