@@ -27,9 +27,7 @@ const newListing = (req,res)=>{
     res.render("../views/newListing.ejs");
 }
 
-const fetch_Albums = (req,res) =>{
 
-}
 module.exports = {
     search,listing,newListing
 }
