@@ -24,7 +24,7 @@ const renderForUser = (req, res, next) => {
         if(verified){
             let userJson = JSON.parse(Buffer.from(token.split('.')[1],"base64"))
             let email = userJson['email']
-            console.log(email)
+          //  console.log(email)
             req.email = email
             next()
         }else{
@@ -38,7 +38,7 @@ const renderForUser = (req, res, next) => {
         res.status(500).send('internal server error')
 
     }
-};  
+};
 module.exports = {
     Album_search,renderForUser
 }

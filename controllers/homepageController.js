@@ -1,5 +1,6 @@
 const index = (req,res) => {
-    res.render('../views/homepage.ejs', {});
+    console.log(req.email)
+    res.render('../views/homepage.ejs', {Email : req.email});
 }
 
 module.exports = {
