@@ -43,6 +43,7 @@ const user_creation_handler = async (req, res) => {
   await newUser.save();
 
   // Return a success message to the client
+  
   res.status(201).json({ message: "User created successfully" });
 };
 

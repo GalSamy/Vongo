@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/signin.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/md5.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script src="/scripts/login.js"></script>
 
     <title>Login</title>
 </head>
@@ -20,13 +25,13 @@
     </div>
     <!-- Email input -->
     <div class="form-outline mb-4 mx-auto text-center col-6">
-      <input type="email" id="form2Example1" class="form-control" />
+      <input type="email" id="email_input" class="form-control" />
       <label class="form-label m-1" for="form2Example1">Email address</label>
     </div>
   
     <!-- Password input -->
     <div class="form-outline mb-4 mx-auto text-center col-6">
-      <input type="password" id="form2Example2" class="form-control" />
+      <input type="password" id="password_input" class="form-control" />
       <label class="form-label m-1" for="form2Example2">Password</label>
     </div>
   

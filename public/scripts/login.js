@@ -5,7 +5,7 @@ $(document).ready(function() {
       var hashValue = CryptoJS.MD5(email+''+password).toString();
       console.log(hashValue)
       $.ajax({
-        url: '/register/createUser',
+        url: '/login/log',
         type: 'POST',
         data:{
             email: email,
@@ -14,15 +14,15 @@ $(document).ready(function() {
         contentType:"application/x-www-form-urlencoded",
         dataType:"json",
         success: function(response) {
+          console.log(response)
           alert(response.message);
           window.location.href = '/login';
         },
+        
         error: function(xhr, status, error) {
           var response = JSON.parse(xhr.responseText);
-          $('#username_input').val('');
           $('#email_input').val('');
           $('#password_input').val('');
-          $('#location_input').val('');
           if (response.message) {
             alert(response.message);
           } else {
