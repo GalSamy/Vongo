@@ -6,6 +6,9 @@ const {registerRouter} =  require("./registerRouter")
 const {listingsRouter} = require("./listingsRouter");
 const {usersRouter} = require("./usersRouter")
 const {servicesRouter} = require("./servicesRouter");
+require("dotenv").config()
+const jwt = require('jsonwebtoken')
+const {renderForUser} = require("../controllers/servicesController")
 const router = express.Router()
 
 router.get("/",index)

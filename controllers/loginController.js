@@ -37,7 +37,7 @@ const user_login_handler = async (req, res) => {
       return res.status(409).json({ message: "Username or password incorrect" });
   }
   try {
-    res.cookie('authToken',generate_jwt(email+'.'+password_hash))
+    res.cookie('authToken',generate_jwt(JSON.stringify({email:email,passwordHash:password_hash})))
     return res.status(200).json({ message: "Logged succesfuly" });
   } catch (error) {
     console.log(error);
