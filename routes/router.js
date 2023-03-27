@@ -13,9 +13,9 @@ const router = express.Router()
 
 router.get("/",renderForUser,index)
 router.use("/users",usersRouter)
-router.use("/login", signinRouter)
+router.use("/login",signinRouter)
 router.use("/register",registerRouter)
-router.use("/listings", listingsRouter)
+router.use("/listings",renderForUser,listingsRouter)
 router.use("/album_api", servicesRouter)
 //router.get("/search", search)
 

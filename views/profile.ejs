@@ -9,7 +9,7 @@
     <title>Profile</title>
 </head>
 <body>
-    <%- include('partials/_nav') %>
+    <%- include('partials/_nav', {Email:locals.email})%>
     <div class="profile m-4">
         <div class="profile-info width-50">
     <img src= "<%=User.userPhoto%>" class="profile-img rounded-circle">

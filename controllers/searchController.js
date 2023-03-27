@@ -2,7 +2,6 @@ const {Listings} = require("../models/listingModel")
 const search = async (req,res) => {
     const listings =await Listings.find({})
     res.render('../views/listings.ejs', {Items:{listings},
-    Email : res.locals.Email
     });
 }
 const listing =async (req,res) => {
