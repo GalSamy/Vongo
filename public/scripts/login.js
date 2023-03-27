@@ -16,7 +16,7 @@ $(document).ready(function() {
         success: function(response) {
           console.log(response)
           alert(response.message);
-          window.location.href = '/login';
+          window.location.replace("/");
         },
         
         error: function(xhr, status, error) {
