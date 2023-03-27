@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 const {Users} = require("../models/userModel")
 
 const register = (req,res) => {
-    res.render('../views/register.ejs', {User:{}});
+    res.render('../views/register.ejs', {User:{},
+    Email : res.locals.Email
+    });
 }
 
 function validateEmail(email) {

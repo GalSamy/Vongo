@@ -1,7 +1,9 @@
 const {Listings} = require("../models/listingModel")
 const search = async (req,res) => {
     const listings =await Listings.find({})
-    res.render('../views/listings.ejs', {Items:{listings}});
+    res.render('../views/listings.ejs', {Items:{listings},
+    Email : res.locals.Email
+    });
 }
 const listing =async (req,res) => {
     const listingId = req.params.id
@@ -19,12 +21,15 @@ const listing =async (req,res) => {
         Item:l,
         Album: Album.data[0],
         Songs: Songs.data,
-        Genre: Genre
+        Genre: Genre,
+        Email : res.locals.Email
     });
 }
 
 const newListing = (req,res)=>{
-    res.render("../views/newListing.ejs");
+    res.render("../views/newListing.ejs", {
+        Email : res.locals.Email
+    });
 }
 
 
