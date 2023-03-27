@@ -2,7 +2,9 @@ jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const {Users} = require("../models/userModel")
 const login = (req,res) => {
-    res.render('../views/login.ejs', {User:{}});
+    res.render('../views/login.ejs', {User:{},
+        Email : res.locals.Email
+    });
 }
 function generate_jwt(data){
     let jwtSecret = process.env.JWT_SECRET_KEY
