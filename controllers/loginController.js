@@ -40,7 +40,7 @@ const user_login_handler = async (req, res) => {
   }
   try {
     res.cookie('authToken',generate_jwt(JSON.stringify({email:email,passwordHash:password_hash})))
-    req.session.cookie.maxAge = 14 * 24 * hour; //2 weeks
+        //req.session.cookie.maxAge = 14 * 24 * hour; //2 weeks
     return res.status(200).json({ message: "Logged succesfuly" });
   } catch (error) {
     console.log(error);

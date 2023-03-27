@@ -32,7 +32,7 @@ const renderForUser = async (req, res, next) => {
         let cookie = req.cookies['authToken'];
         let token = req.header('Cookie');
         token = token.replace('authToken=','')
-        console.log("token "+ token)
+        console.log("token (inside renderForUser) "+ token)
         const verified = jwt.verify(token, jwtSecretKey);
         if(verified){
             let userJson = JSON.parse(Buffer.from(token.split('.')[1],"base64"))

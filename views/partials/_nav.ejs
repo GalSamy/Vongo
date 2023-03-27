@@ -14,40 +14,45 @@
     <!-- container for responsiveness -->
     <div class="container-fluid">
 
-      <!-- first item: brand name -->
+        <!-- first item: brand name -->
         <a class="navbar-brand ml-4" href="#">VONGO</a>
-        <a class="navbar-brand ml-4" href="#"><%= console.log("email of "+locals.Email) %></a>
+        <a class="navbar-brand ml-4" href="#"><%= console.log("email of "+Email) %></a>
 
         <a class="navbar-brand ml-4" href="#"><%=locals.Email%></a>
 
 
-      <!-- this is the button when it collapses due to small screen size (data-bs-target must match the ID of the div below)-->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <!-- this is the button when it collapses due to small screen size (data-bs-target must match the ID of the div below)-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <!-- this div holds everything who is going to collapse inside the button (be careful with the ID. It must match with the button target) -->
-      <div class="collapse navbar-collapse col-4" id="navbarSupportedContent">
+        <!-- this div holds everything who is going to collapse inside the button (be careful with the ID. It must match with the button target) -->
+        <div class="collapse navbar-collapse col-4" id="navbarSupportedContent">
 
-        <!-- this list contains the "menu options (items)" such as download, contact, pricing, etc. -->
-        <ul id="my-ul" class="ms-auto navbar-nav">
+            <!-- this list contains the "menu options (items)" such as download, contact, pricing, etc. -->
+            <ul id="my-ul" class="ms-auto navbar-nav">
 
-          <!-- this is an item -->
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <!-- this is another item -->
-          <li class="nav-item">
-            <a class="nav-link" href="/users/@me">Profile</a>
-          </li>
+                <!-- this is an item -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <!-- this is another item -->
+                <%if(locals.Email){%>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/@me">Profile</a>
+                    <%}else{%>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                    <%}%>
+                </li>
 
-        </ul>
+            </ul>
 
-      </div>
+        </div>
 
     </div>
 
-  </nav>
+</nav>
 
 
 <!--<nav class="navbar bg-body-tertiary p-1 width-100">
