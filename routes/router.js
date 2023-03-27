@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken')
 const {renderForUser} = require("../controllers/servicesController")
 const router = express.Router()
 
-router.get("/",index)
+router.get("/",renderForUser,index)
 router.use("/users",usersRouter)
 router.use("/login", signinRouter)
 router.use("/register",registerRouter)

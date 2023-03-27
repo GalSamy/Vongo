@@ -1,8 +1,7 @@
 const { login } = require("./loginController")
 const express = require("express")
 const jwt = require('jsonwebtoken')
-require("dotenv").config()
-
+const util = require('util')
 var bodyParser=require('body-parser')
 var cookieParser=require('cookie-parser')
 var jsonParser = bodyParser.json();
@@ -14,28 +13,38 @@ const Album_search = async (req,res) => {
 }
 // Middleware to validate user's session
 const renderForUser = (req, res, next) => {
+    console.log("renderForUser activated")
+    req.locals = {'Email':'tal'}
+    res.locals = {'Email':''}
+
     try {
+        
         let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
         let jwtSecretKey = process.env.JWT_SECRET_KEY;
         let cookie = req.cookies['authToken'];
         let token = req.header('Cookie');
         token = token.replace('authToken=','')
+        console.log("token "+ token)
         const verified = jwt.verify(token, jwtSecretKey);
         if(verified){
             let userJson = JSON.parse(Buffer.from(token.split('.')[1],"base64"))
             let email = userJson['email']
-          //  console.log(email)
-            req.email = email
+
+            console.log("email is: "+email)
+            res.locals.Email = email
+            console.log("res.locals.Email "+res.locals.Email )
+
             next()
         }else{
             // Access Denied
-            req.email = ''
+            req.locals.Email = ''
             next();
         }
     }
     catch(err){
-        console.log(err);
-        res.status(500).send('internal server error')
+        console.log("Error: "+err);
+        req.locals.Email = ''
+        next()
 
     }
 };
