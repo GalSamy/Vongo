@@ -51,5 +51,9 @@ const search = val => {
 searchBar.addEventListener("input", async content =>{
     let input = searchBar.value
     console.log(input)
+    if (input === ""){
+        removeAll(dataList)
+        return;
+    }
      await search(input)
 })

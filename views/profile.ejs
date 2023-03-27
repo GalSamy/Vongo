@@ -10,10 +10,19 @@
 </head>
 <body>
 <%= console.log("locals email "+locals.email) %>
-    <%- include('partials/_nav', {Email:locals.email})%>
+    <%- include('partials/_nav', {Email:locals.userName})%>
     <div class="profile m-4">
         <div class="profile-info width-50">
     <img src= "<%=User.userPhoto%>" class="profile-img rounded-circle">
+            <div class="input-group">
+                <%if(isProfile){%>
+                    <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/png, image/jpeg">
+                    <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
+                    <%}else{%>
+
+                    <%}%>
+
+            </div>
             <p class="m-1 fs-1"> <%=User.userName%></p>
             <p class="location m-1 fs-2"><%=User.Location%></p>
         </div>

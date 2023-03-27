@@ -5,7 +5,9 @@ buy.addEventListener("click",()=>{
     window.location.href = "http://localhost:8080/listings";
     console.log("redirect")
 })
-
+sell.addEventListener("click", ()=>{
+    window.location.href = "http://localhost:8080/listings/new";
+})
 function rec_hover(rec,text){
     rec.style.webkitTransform = 'rotate(180deg) scale(1.1)';
     rec.style.msTransform = 'rotate(180deg) scale(1.1)';
