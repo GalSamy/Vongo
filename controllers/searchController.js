@@ -5,25 +5,28 @@ const search = async (req,res) => {
     });
 }
 const listing =async (req,res) => {
+    let er = false;
     const listingId = req.params.id
     const l = await Listings.findOne({_id: listingId}).catch(() => {
-        res.sendStatus(404)
-        return
+        er = true;
+        res.status(404).send("Resource not found. Invalid ID")
     })
-    const name = l.name.replace(/ /g,"%20")
-    let Album = await fetch("https://api.deezer.com/search/album/?q=" + name) // change listing scheme to include album Id of api!!
-    Album = await Album.json()
-    let Songs = await fetch(Album.data[0].tracklist)
-    Songs = await Songs.json()
-    let Genre = await fetch("https://api.deezer.com/genre/" + Album.data[0].genre_id)
-    Genre = await Genre.json()
-    res.render('../views/listing.ejs', {
-        Item:l,
-        Album: Album.data[0],
-        Songs: Songs.data,
-        Genre: Genre,
-        Email : res.locals.Email
-    });
+    if (!er) {
+        const name = l.name.replace(/ /g, "%20")
+        let Album = await fetch("https://api.deezer.com/search/album/?q=" + name) // change listing scheme to include album Id of api!!
+        Album = await Album.json()
+        let Songs = await fetch(Album.data[0].tracklist)
+        Songs = await Songs.json()
+        let Genre = await fetch("https://api.deezer.com/genre/" + Album.data[0].genre_id)
+        Genre = await Genre.json()
+        res.render('../views/listing.ejs', {
+            Item: l,
+            Album: Album.data[0],
+            Songs: Songs.data,
+            Genre: Genre,
+            Email: res.locals.Email
+        });
+    }
 }
 
 const newListing = (req,res)=>{

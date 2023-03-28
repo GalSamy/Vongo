@@ -11,7 +11,7 @@ let CurrentUser = {
 } // get from cookies or smth
 
 const profile = async (req,res) => {
-
+    let er = false;
     if (req.params.userid === "@me") // /users/@me is the profile page
     {
         let location = res.locals.Location.replace(/ /g,"%20")
@@ -28,8 +28,11 @@ const profile = async (req,res) => {
         }
     }else {
         let user = await Users.findOne({_id: req.params.userid}).catch(e => {
-            res.sendStatus(404)
+            console.log("catch " + e)
+            res.status(404).send("Resource not found. Invalid ID")
+            er = true;
         })
+            if(!er)
             res.render('../views/profile.ejs', {User: user, isProfile:false});
     }
 }

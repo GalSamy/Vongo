@@ -5,7 +5,7 @@ const userModel = new Schema({
     userName: String, // String is shorthand for {type: String}
     email:String,
     userId: String,
-    userPhoto: {type : String, default : "/assests/Question_mark_(black).png"},
+    userPhoto: {type : String, default : "/assets/profile stock 1.png"},
     Sells: Array,
     Orders: Array,
     Location: String,
