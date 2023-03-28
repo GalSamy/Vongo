@@ -43,7 +43,7 @@ const renderForUser = async (req, res, next) => {
             let email = userJson['email']
             let userInfo = await getUserInfo(email)
             console.log(userInfo)
-            console.log("email is: "+email)
+           // console.log("email is: "+email)
             res.locals = userInfo
             console.log("res.locals "+res.locals )
             next()

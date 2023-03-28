@@ -6,7 +6,10 @@ const listingModel = new Schema({
     listedBy: userModel, // String is shorthand for {type: String}
     photo: String,
     albumId: String,
+    name: String,
     lastBid: String, //change to bid scheme
+    artist: String,
+    release: String
 });
 
 const Listings = mongoose.model("Listings", listingModel)

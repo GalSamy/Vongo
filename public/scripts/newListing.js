@@ -95,7 +95,12 @@ newListingForm.addEventListener("submit",(function (e){
         }
         formData.append('photo', file);
         formData.append('bid',bid)
-        formData.append('albumId', picked.id)
+        formData.append('picked', picked.id)
+
+        formData.append('title',picked.title)
+        formData.append('artist',picked.artist.name)
+       // formData.append('release',picked.release_date)
+        console.log("picked: ", picked)
         console.log(file)
         $.ajax({
             url: 'http://localhost:8080/listings/postNew',
@@ -105,6 +110,8 @@ newListingForm.addEventListener("submit",(function (e){
             processData: false,
             success: function(response) {
                 console.log(response)
+                window.location.href = "http://localhost:8080/listings";
+
             },
             error: function(xhr, status, error) {
                 var response = JSON.parse(xhr.responseText);
