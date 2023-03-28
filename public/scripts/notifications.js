@@ -1,4 +1,3 @@
-const socket = io();
 
 
 function hasAuthToken() {
@@ -26,7 +25,7 @@ function getCookie(name) {
 }
 // Check if the user is already subscribed to notifications
 const isSubscribed = localStorage.getItem('isSubscribed');
-
+console.log(socket.connected)
 if (!isSubscribed && hasAuthToken()) {
 
     console.log("check+"+getCookie('authToken'))

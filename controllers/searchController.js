@@ -1,9 +1,9 @@
 const {Listings} = require("../models/listingModel")
 const mongoose = require('mongoose')
 const fs = require('fs');
-
+const {newListingNotify} = require('./socketModule')
 const postNewListing = async (req,res) =>{
-    console.log(req.locals)
+    ////console.log(req.locals)
     if (req.locals.email === ""){
          return res.status(409).json({ message: "not logged in" });
     }
@@ -16,15 +16,16 @@ const postNewListing = async (req,res) =>{
     if (album.error){
         return res.status(409).json({ message: "wrong album id" });
     }
+    console.log("new listing notify")
     let picked = req.body.picked
-    console.log("id after send", picked)
+    ///console.log("id after send", picked)
     res.send({message:"success"})
     let title = req.body.title
     let a = await fetch("https://api.deezer.com/album/" + picked)
     a = await a.json()
     let release = a.release_date
     let artist = req.body.artist
-    console.log("relese: " + release)
+    //console.log("relese: " + release)
     let newlisting = new Listings({
         listedBy: res.locals,
         photo : "",
@@ -35,7 +36,6 @@ const postNewListing = async (req,res) =>{
         release: release
     })
     await newlisting.save()
-    console.log(req.file)
     fs.appendFile("./public/uploads/" + newlisting._id +"."+ req.file.mimetype.split("/")[1], req.file.buffer, (err) => {
         if (err) {
             console.error(err);
@@ -45,7 +45,8 @@ const postNewListing = async (req,res) =>{
     });
     newlisting.photo = "/uploads/" + newlisting._id + "."+req.file.mimetype.split("/")[1]
    await newlisting.save()
-    res.redirect("http://localhost:8080/listings")
+   newListingNotify()
+
 }
 const search = async (req,res) => {
     const listings =await Listings.find({})
@@ -61,10 +62,10 @@ const listing =async (req,res) => {
     })
     if (!er) {
         const name = l.albumId
-        console.log(name)
+        //console.log(name)
         let Album = await fetch("https://api.deezer.com/album/" + name)
         Album = await Album.json()
-        console.log(Album)
+        //console.log(Album)
         let Songs = await fetch(Album.tracklist)
         Songs = await Songs.json()
         let Genre = await fetch("https://api.deezer.com/genre/" + Album.genre_id)
