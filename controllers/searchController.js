@@ -8,6 +8,7 @@ const listing =async (req,res) => {
     const listingId = req.params.id
     const l = await Listings.findOne({_id: listingId}).catch(() => {
         res.sendStatus(404)
+        return
     })
     const name = l.name.replace(/ /g,"%20")
     let Album = await fetch("https://api.deezer.com/search/album/?q=" + name) // change listing scheme to include album Id of api!!
