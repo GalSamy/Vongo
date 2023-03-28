@@ -11,9 +11,9 @@
 <body>
 <%= console.log("locals email "+locals.email) %>
     <%- include('partials/_nav', {Email:locals.userName})%>
-    <div class="container-fluid">
-    <div class="profile m-4 row row-cols-2">
-        <div class="profile-info width-50 d-inline float-start col">
+    <div class="container w-50 float-start">
+    <div class="profile m-4 row row-cols-1">
+        <div class="profile-info width-50 float-start  m-1">
     <img src= "<%=User.userPhoto%>" class="profile-img rounded-circle">
             <div class="input-group">
                 <%if(isProfile){%>
@@ -25,13 +25,30 @@
 
             </div>
             <p class="m-1 fs-1"> <%=User.userName%></p>
-            <p class="location m-3 fs-2"><%=User.Location%></p>
-            <div class="map m-4 col">
-                <img src="<%=Pic%>" id="map">
+            <!-- Button trigger modal -->
+            <a type="button" class="location m-1 fs-2" data-bs-toggle="modal" data-bs-target="#locationModal">
+                <%=User.Location%>
+            </a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Map :</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="<%=Pic%>" id="map">
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="activities d-block col">
+        <div class="activities col m-4">
             <ol class="list-group list-group-numbered">
                 <li class="list-group-item d-flex justify-content-between align-items-start fs-3" id="sells">
                     <div class="ms-2 me-auto">
@@ -48,7 +65,6 @@
                     <span class="badge bg-primary rounded-pill"><%=User.Orders.length%></span>
                 </li>
             </ol>
-
         </div>
     </div>
     </div>

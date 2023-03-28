@@ -1,5 +1,6 @@
 const dataList = $("#albums")[0]
 const searchBar = $("#albumSearch")[0]
+const searchDiv = $("#searchDiv")[0]
 function removeAll(element){
     let child = element.lastElementChild;
     while (child) {
@@ -7,6 +8,7 @@ function removeAll(element){
         child = element.lastElementChild;
     }
 }
+
 const search = val => {
     removeAll(dataList)
     if (val === "") {
@@ -19,6 +21,7 @@ const search = val => {
         dataType:"json",
         success:  function(response) {
             removeAll(dataList)
+            let picked;
             response.forEach(a => {
                 let card = document.createElement("div")
                 card.className = "card col-4 me-3 mb-3 p-0"
@@ -39,6 +42,24 @@ const search = val => {
                 card.append(cbody)
                 card.append(btn)
                 dataList.append(card)
+                btn.addEventListener("click", function handlePick(e){
+                    searchDiv.removeChild("btn")
+                    removeAll(dataList)
+                    dataList.append(card)
+                    searchBar.disabled = true
+                    card.removeChild(btn)
+                    card.append(document.createElement("p").textContent = a.id)
+                    picked = a;
+                    let b = document.createElement("btn")
+                    b.textContent = "Edit"
+                    b.className = "btn btn-primary fw-bold m-1"
+                    b.addEventListener("click", (e) => {
+                        searchBar.disabled = false
+                        picked = null;
+                    })
+                    searchDiv.append(b)
+
+                })
             })
             console.log(response); // Handle success response
         },
