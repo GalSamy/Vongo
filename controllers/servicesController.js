@@ -13,6 +13,10 @@ const Album_search = async (req,res) => {
      resp = await resp.json()
      res.send(resp.data)
 }
+function verifyUser(token){
+    var verify = jwt.verify(token,process.env.JWT_SECRET_KEY)
+    return verify;
+}
 async function getUserInfo(email){
     let user = await Users.findOne({email:email});
     return user
@@ -57,5 +61,5 @@ const renderForUser = async (req, res, next) => {
     }
 };
 module.exports = {
-    Album_search,renderForUser
+    Album_search,renderForUser,verifyUser
 }
