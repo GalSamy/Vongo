@@ -18,8 +18,7 @@ window.addEventListener("load", (event) => {
         console.log('Error:', error);
       }
     });
-  }
-
+}
 socket.on('newListing',()=>{
     console.log('newListing sent!')
     refreshPage()
