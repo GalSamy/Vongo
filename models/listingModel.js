@@ -9,7 +9,8 @@ const listingModel = new Schema({
     name: String,
     lastBid: String, //change to bid scheme
     artist: String,
-    release: String
+    release: String,
+    Bids: Array
 });
 
 const Listings = mongoose.model("Listings", listingModel)

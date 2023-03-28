@@ -16,7 +16,7 @@ router.use("/users",renderForUser,usersRouter)
 router.use("/login",renderForUser,signinRouter)
 router.use("/register",renderForUser,registerRouter)
 router.use("/listings",renderForUser,listingsRouter)
-router.use("/album_api", servicesRouter)
+router.use("/utils", servicesRouter)
 //router.get("/search", search)
 
 

@@ -22,10 +22,18 @@
     <p class="h2 "><%= Album.artist.name %>, <%= Album.release_date%></p>
     <p class="h3">Genre : <%= Genre.name%></p>
     <p class="fs-4 ">Seller: <a class="clink" href="http://localhost:8080/users/<%=Item.listedBy._id %>"><%= Item.listedBy.userName%></a></p>
-    <p class="fs-4 d-inline">Last Bid : <%= Item.lastBid%></p> <!-- change bid -->
+    <p class="fs-4 d-inline" id="lastbid">Last Bid : <%= Item.lastBid%>$</p> <!-- change bid -->
         <!-- Button trigger modal -->
         <%= console.log("locals email "+locals.email) %>
-    <% if(locals.email) {%>
+        <% console.log(JSON.stringify(locals._id) === JSON.stringify(Item.listedBy._id))%>
+    <% if (JSON.stringify(locals._id) === JSON.stringify(Item.listedBy._id)) {%>
+        <ul>
+            <% for(let i = 0; i < Item.Bids.length; i++){%>
+            <li><%=Item.Bids[i].bidBy.userName%> put a bid of <%=Item.Bids[i].amount%>$</li>
+            <%}%>
+        </ul>
+        <%} else {%>
+99    <% if(locals.email) {%>
         <button type="button" class="btn btn-primary d-inline mb-2" data-bs-toggle="modal" data-bs-target="#bidModal">
             Place A Bid
         </button>
@@ -41,18 +49,18 @@
                     <div class="modal-body">
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-text">.00</span>
+                            <input type="number" id="bidAmount" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Bid</button>
+                        <button type="button" class="btn btn-primary" onclick="handleBid(<%= JSON.stringify(Item._id)%>, <%= JSON.stringify(locals._id)%>)">Bid</button>
                     </div>
                 </div>
             </div>
         </div>
             <%}%>
+        <%}%>
     <p class="footer"> listing id : <%= Item._id%> </p>
     </div>
     <div class="float-end">
@@ -74,6 +82,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script src="../scripts/homepage.js"></script>
+<script src="/scripts/listing.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

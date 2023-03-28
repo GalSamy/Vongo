@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {Users} = require("../models/userModel")
+const {Users, userModel} = require("../models/userModel")
 const socketIo = require('socket.io');
 const { login } = require("./loginController")
 const express = require("express")
@@ -29,8 +29,8 @@ async function getUserInfo(email){
 var count = 0;
 // Middleware to validate user's session
 const renderForUser = async (req, res, next) => {
-    //console.log("renderForUser activated")
-    //console.log("---------------------"+count)
+    console.log("renderForUser activated")
+    console.log("---------------------"+count)
     count++
     req.locals = {'Email':'tal'}
     res.locals = {'Email':''}
@@ -40,13 +40,14 @@ const renderForUser = async (req, res, next) => {
         let cookie = req.cookies['authToken'];
         let token = req.header('Cookie');
         token = token.replace('authToken=','')
-        //console.log("token (inside renderForUser) "+ token)
+        console.log("token (inside renderForUser) "+ token)
         const verified = jwt.verify(token, jwtSecretKey);
         if(verified){
-            let userJson = JSON.parse(Buffer.from(token.split('.')[1],"base64"))
+            let userJson = extractUserInfo(token)
             let email = userJson['email']
             let userInfo = await getUserInfo(email)
-            //console.log(userInfo)
+
+            console.log(userInfo)
            // console.log("email is: "+email)
             res.locals = userInfo
             next()
@@ -63,8 +64,30 @@ const renderForUser = async (req, res, next) => {
 
     }
 };
+const {Bids} = require("../models/bidModel")
+const {Listings} = require("../models/listingModel")
+
+const newBid = async (req,res) => {
+    let amount = parseInt(req.body.bid)
+    console.log(req.body.bidBy)
+    let l = await Listings.findById(req.body.listing)
+    let bb = await Users.findById(req.body.bidBy)
+    let newBid = new Bids({
+        bidBy: bb,
+        amount:amount,
+        listing:l
+    })
+    newBid =await newBid.save()
+    console.log(newBid.bidBy)
+    l.Bids.push(newBid)
+    l.lastBid = amount
+    l.save()
+    await res.send({lastBid: newBid.amount})
+
+
+}
 
 
 module.exports = {
-    Album_search,renderForUser,verifyUser,extractUserInfo
+    Album_search,renderForUser,verifyUser,extractUserInfo,newBid
 }
