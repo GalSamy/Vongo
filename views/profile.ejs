@@ -25,11 +25,12 @@
 
             </div>
             <p class="m-1 fs-1"> <%=User.userName%></p>
-            <p class="location m-1 fs-2"><%=User.Location%></p>
+            <p class="location m-3 fs-2"><%=User.Location%></p>
+            <div class="map m-4 col">
+                <img src="<%=Pic%>" id="map">
+            </div>
         </div>
-        <div class="map m-4 col">
-            <img src="<%=Pic%>" id="map">
-        </div>
+
         <div class="activities d-block col">
             <ol class="list-group list-group-numbered">
                 <li class="list-group-item d-flex justify-content-between align-items-start fs-3" id="sells">
