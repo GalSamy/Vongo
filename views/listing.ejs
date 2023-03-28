@@ -14,12 +14,12 @@
     <title>Vongo</title>
 </head>
 <body>
-<%- include('partials/_nav') %>
+<%- include('partials/_nav' , {Email:locals.email}) %>
 <div class="row">
 <div class="m-4 col">
     <div class="w-50 float-start">
-    <p class="h1 fw-bolder"><%=Item.name %></p>
-    <p class="h2 "><%= Item.artist %>, <%= Item.year%></p>
+    <p class="h1 fw-bolder"><%=Album.title %></p>
+    <p class="h2 "><%= Album.artist.name %>, <%= Album.release_date%></p>
     <p class="h3">Genre : <%= Genre.name%></p>
     <p class="fs-4 ">Seller: <a class="clink" href="http://localhost:8080/users/<%=Item.listedBy._id %>"><%= Item.listedBy.userName%></a></p>
     <p class="fs-4 d-inline">Last Bid : <%= Item.lastBid%></p> <!-- change bid -->
@@ -56,7 +56,7 @@
     <p class="footer"> listing id : <%= Item._id%> </p>
     </div>
     <div class="float-end">
-        <img src="<%= Item.photo%>">
+        <img src="<%= Item.photo%>" class="main-image">
     </div>
 </div>
 </div>

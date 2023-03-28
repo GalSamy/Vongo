@@ -46,6 +46,11 @@ const renderForUser = async (req, res, next) => {
             let userJson = extractUserInfo(token)
             let email = userJson['email']
             let userInfo = await getUserInfo(email)
+<<<<<<< HEAD
+=======
+            console.log(userInfo)
+           // console.log("email is: "+email)
+>>>>>>> refs/remotes/origin/master
             res.locals = userInfo
             next()
         }else{

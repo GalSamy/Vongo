@@ -9,3 +9,7 @@
 .audio{
     max-width: 10rem;
 }
+.main-image{
+    width:clamp(350px,15vw,500px);
+    height:clamp(350px,15vw,500px) ;
+}
