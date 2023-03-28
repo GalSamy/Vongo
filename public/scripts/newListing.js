@@ -1,6 +1,8 @@
 const dataList = $("#albums")[0]
 const searchBar = $("#albumSearch")[0]
 const searchDiv = $("#searchDiv")[0]
+const newListingForm = $("#newListingForm")[0]
+let picked;
 function removeAll(element){
     let child = element.lastElementChild;
     while (child) {
@@ -21,10 +23,10 @@ const search = val => {
         dataType:"json",
         success:  function(response) {
             removeAll(dataList)
-            let picked;
+
             response.forEach(a => {
                 let card = document.createElement("div")
-                card.className = "card col-4 me-3 mb-3 p-0"
+                card.className = "card col-4 me-3 mb-3 p-0 align-items-center justify-content-center text-center"
                 card.style.width = "15rem"
                 let img = document.createElement("img")
                 img.className = "card-img-top w-100 h-50"
@@ -43,20 +45,24 @@ const search = val => {
                 card.append(btn)
                 dataList.append(card)
                 btn.addEventListener("click", function handlePick(e){
-                    searchDiv.removeChild("btn")
                     removeAll(dataList)
                     dataList.append(card)
                     searchBar.disabled = true
                     card.removeChild(btn)
                     card.append(document.createElement("p").textContent = a.id)
                     picked = a;
+                    card.className += " d-flex align-items-center justify-content-center"
                     let b = document.createElement("btn")
                     b.textContent = "Edit"
                     b.className = "btn btn-primary fw-bold m-1"
                     b.addEventListener("click", (e) => {
                         searchBar.disabled = false
                         picked = null;
+                        removeAll(dataList)
+                        search(searchBar.value)
+                        b.remove()
                     })
+                    b.id = "edit"
                     searchDiv.append(b)
 
                 })
@@ -78,3 +84,37 @@ searchBar.addEventListener("input", async content =>{
     }
      await search(input)
 })
+newListingForm.addEventListener("submit",(function (e){
+    e.preventDefault()
+        const fileInput = document.getElementById('photo');
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        let bid = $("#bid")[0].value
+        if (!(file && bid && picked)){
+            return alert("no parameters")
+        }
+        formData.append('photo', file);
+        formData.append('bid',bid)
+        formData.append('albumId', picked.id)
+        console.log(file)
+        $.ajax({
+            url: 'http://localhost:8080/listings/postNew',
+            type: 'POST',
+            data:formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log(response)
+            },
+            error: function(xhr, status, error) {
+                var response = JSON.parse(xhr.responseText);
+
+                if (response.message) {
+                    alert(response.message);
+                } else {
+                    alert("An error occurred. Please try again.");
+                }
+            }
+        });
+    }
+))
