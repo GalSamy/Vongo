@@ -1,5 +1,8 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const http = require('http');
+const socketIo = require('socket.io');
+const socketModule = require('./controllers/socketModule')
 const bodyParser = require("body-parser")
 const crypto = require('crypto-js')
 jwt = require('jsonwebtoken')
@@ -18,10 +21,16 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
+socketModule.setupSocketListeners(io);
+socketModule.notifyUser(io,"hello there tal","ykvnkl2@gmail.com")
 mongoose.connect(process.env.CONNECTION_STRING);
 mongoose.connection.on("connected", ()=>{
   console.log("connected to DB")
 })
-  app.listen(8080, ()=>{
+  server.listen(8080, ()=>{
     console.log("listening port 8080")
   })
