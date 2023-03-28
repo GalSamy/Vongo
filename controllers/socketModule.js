@@ -30,7 +30,6 @@ async function setupSocketListeners(_io) {
         notifyUser(io,"please","ykvnkl2@gmail.com")
     })
     });
-    console.log(io.of('/').adapter.rooms.has('listings'))
     io.to('listings').emit('newListing')
 
   }
