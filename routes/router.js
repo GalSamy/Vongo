@@ -5,6 +5,7 @@ const {signinRouter} = require("./signinRouter")
 const {registerRouter} =  require("./registerRouter")
 const {listingsRouter} = require("./listingsRouter");
 const {usersRouter} = require("./usersRouter")
+const {adminRouter} = require("./adminRouter")
 const {servicesRouter} = require("./servicesRouter");
 require("dotenv").config()
 const jwt = require('jsonwebtoken')
@@ -13,6 +14,7 @@ const router = express.Router()
 
 router.get("/",renderForUser,index)
 router.use("/users",renderForUser,usersRouter)
+router.use("/admin",renderForUser,adminRouter)
 router.use("/login",renderForUser,signinRouter)
 router.use("/register",renderForUser,registerRouter)
 router.use("/listings",renderForUser,listingsRouter)

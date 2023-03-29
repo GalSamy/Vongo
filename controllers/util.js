@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+const {Users, userModel} = require("../models/userModel")
 function extractUserInfo(token){
     let userJson = JSON.parse(Buffer.from(token.split('.')[1],"base64"))
     return userJson

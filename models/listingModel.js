@@ -7,6 +7,7 @@ const listingModel = new Schema({
     photo: String,
     albumId: String,
     name: String,
+    closed:Boolean,
     lastBid: String, //change to bid scheme
     artist: String,
     release: String,
