@@ -2,6 +2,8 @@ const {Listings} = require("../models/listingModel")
 const mongoose = require('mongoose')
 const fs = require('fs');
 const {newListingNotify} = require('./socketModule')
+const {Bids} = require("../models/bidModel");
+const {Users} = require("../models/userModel")
 const postNewListing = async (req,res) =>{
     ////console.log(req.locals)
     if (req.locals.email === ""){
@@ -90,8 +92,32 @@ const newListing = (req,res)=>{
         res.redirect("/login")
     }
 }
-
-
+const deleteListing = async (req,res) =>{
+    console.log(res.locals._id)
+    let l = await Listings.findById(req.body.listing)
+    if(res.locals._id.equals(l.listedBy._id)){
+       let bidsQuery = l.Bids
+        Listings.deleteOne({_id : l._id})
+        bidsQuery.forEach(b =>{
+           Bids.deleteOne({_id:b._id})
+        })
+    }
+}
+const closeListing = async (req,res) =>{
+    let l = await Listings.findById(req.body.listing)
+    let b = await Bids.findById(req.body.bid)
+    if(l && res.locals._id.equals(l.listedBy._id)){
+        l.closed = true
+        l.save()
+        let seller = await Users.findById(l.listedBy._id)
+        let bidder = await Users.findById(b.bidBy._id)
+        seller.Sells.push(l)
+        seller.save()
+        bidder.Orders.push(l)
+        bidder.save()
+        res.send({message : "sell completed"})
+    }
+}
 module.exports = {
-    search,listing,newListing,postNewListing
+    search,listing,newListing,postNewListing,deleteListing,closeListing
 }

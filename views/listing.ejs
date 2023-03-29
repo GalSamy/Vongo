@@ -36,10 +36,11 @@
         <%= console.log("locals email "+locals.email) %>
         <% console.log(JSON.stringify(locals._id) === JSON.stringify(Item.listedBy._id))%>
     <% if (JSON.stringify(locals._id) === JSON.stringify(Item.listedBy._id)) {%>
-        <button></button>
+        <button class="btn btn-danger" onclick="handleDelete(<%= JSON.stringify(Item._id)%>)">Delete Listing</button>
         <ul>
             <% for(let i = 0; i < Item.Bids.length; i++){%>
             <li><%=Item.Bids[i].bidBy.userName%> put a bid of <%=Item.Bids[i].amount%>$</li>
+            <button class="btn btn-success" onclick="handleAccept(<%= JSON.stringify(Item._id)%>, <%= JSON.stringify(Item.Bids[i]._id)%>)">Accept Bid</button>
             <%}%>
         </ul>
         <%} else {%>
