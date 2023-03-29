@@ -12,7 +12,7 @@ html, body {
     color: #DE681D;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size:clamp(10%,5vh + 1.5rem,10rem);
+    font-size:clamp(0.5rem,3vw + 4vh ,10rem);
 
 }
 @media screen and (max-width: 1000px) {
