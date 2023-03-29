@@ -17,7 +17,7 @@ const search = val => {
         return;
     }
     $.ajax({
-        url: "http://localhost:8080/utils/album_search/" + val ,
+        url: "/utils/album_search/" + val ,
         type: 'GET',
         contentType:"application/x-www-form-urlencoded",
         dataType:"json",
@@ -102,7 +102,7 @@ newListingForm.addEventListener("submit",(function (e){
        // formData.append('release',picked.release_date)
         console.log("picked: ", picked)
         $.ajax({
-            url: 'http://localhost:8080/listings/postNew',
+            url: '/listings/postNew',
             type: 'POST',
             data:formData,
             contentType: false,

@@ -3,7 +3,7 @@ const socketIo = require('socket.io');
 const { login } = require("./loginController")
 const express = require("express")
 const jwt = require('jsonwebtoken')
-const {extractUserInfo,verify} = require('./servicesController') 
+const {extractUserInfo} = require('./util')
 let io 
 async function setupSocketListeners(_io) {
     io=_io
