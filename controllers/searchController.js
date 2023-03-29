@@ -86,7 +86,7 @@ const newListing = (req,res)=>{
             Email: res.locals.Email
         });
     }else{
-        res.redirect("http://localhost:8080/login")
+        res.redirect("/login")
     }
 }
 

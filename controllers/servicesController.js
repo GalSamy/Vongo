@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const {Users, userModel} = require("../models/userModel")
 const socketIo = require('socket.io');
+const {notifyUser} = require('./socketModule')
+
 const { login } = require("./loginController")
 const express = require("express")
 const jwt = require('jsonwebtoken')
@@ -82,9 +84,9 @@ const newBid = async (req,res) => {
     l.Bids.push(newBid)
     l.lastBid = amount
     l.save()
+    notifyUser("somechecks","ykvnkl2@gmail.com")
     await res.send({lastBid: newBid.amount})
-
-
+    
 }
 
 

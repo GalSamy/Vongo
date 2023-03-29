@@ -26,7 +26,6 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 socketModule.setupSocketListeners(io);
-socketModule.notifyUser(io,"hello there tal","ykvnkl2@gmail.com")
 mongoose.connect(process.env.CONNECTION_STRING);
 mongoose.connection.on("connected", ()=>{
   console.log("connected to DB")

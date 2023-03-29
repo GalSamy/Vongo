@@ -3,7 +3,7 @@ const socketIo = require('socket.io');
 const { login } = require("./loginController")
 const express = require("express")
 const jwt = require('jsonwebtoken')
-const {extractUserInfo,verify} = require('./servicesController') 
+//const {extractUserInfo,verify} = require('./servicesController') 
 let io 
 async function setupSocketListeners(_io) {
     io=_io
@@ -26,11 +26,8 @@ async function setupSocketListeners(_io) {
         console.log("someone joined")
         socket.join('listings')
       })
-      socket.on('notify',(message)=>{
-        notifyUser(io,"please","ykvnkl2@gmail.com")
-    })
+
     });
-    io.to('listings').emit('newListing')
 
   }
 function newListingNotify(){
@@ -38,10 +35,10 @@ function newListingNotify(){
     console.log('newListingNotify activated ')
     io.to('listings').emit('newListing')
 }
-function notifyUser(io,notification,targetEmail){
-    console.log("--------"+io+notification+targetEmail)
-     io.to(`notifications-${targetEmail}`).emit(`notification`,notification)
+async function notifyUser(notification,targetEmail){
+  console.log("--------"+notification+targetEmail)
+   io.to(`notifications-${targetEmail}`).emit(`notification`,notification)
 }
 module.exports = {
-    setupSocketListeners,notifyUser,newListingNotify
+    setupSocketListeners,newListingNotify,notifyUser,
 };

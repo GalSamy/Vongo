@@ -1,5 +1,4 @@
-
-
+const socket = io()
 function hasAuthToken() {
     const cookies = document.cookie.split('; ');
     for (const cookie of cookies) {
@@ -34,7 +33,8 @@ if (!isSubscribed && hasAuthToken()) {
   // Set the flag to indicate that the user is subscribed
   localStorage.setItem('isSubscribed', 'true');
 }
-socket.emit('notify','check checl')
 socket.on('notification',(message)=>{
+  console.log(message)
     alert(message)
 })
+
