@@ -35,7 +35,8 @@ const postNewListing = async (req,res) =>{
         artist : artist,
         lastBid: req.body.bid,
         name: title,
-        release: release
+        release: release,
+        closed: false
     })
     await newlisting.save()
     fs.appendFile("./public/uploads/" + newlisting._id +"."+ req.file.mimetype.split("/")[1], req.file.buffer, (err) => {
@@ -51,7 +52,7 @@ const postNewListing = async (req,res) =>{
 
 }
 const search = async (req,res) => {
-    const listings =await Listings.find({})
+    const listings =await Listings.find({closed : false})
     res.render('../views/listings.ejs', {Items:{listings},
     });
 
@@ -116,6 +117,7 @@ const closeListing = async (req,res) =>{
         bidder.Orders.push(l)
         bidder.save()
         res.send({message : "sell completed"})
+        newListingNotify()
     }
 }
 module.exports = {
