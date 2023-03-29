@@ -2,11 +2,11 @@ let buy = $("#buy")[0]
 let sell = $("#sell")[0]
 console.log(buy)
 buy.addEventListener("click",()=>{
-    window.location.href = "http://localhost:8080/listings";
+    window.location.href = "/listings";
     console.log("redirect")
 })
 sell.addEventListener("click", ()=>{
-    window.location.href = "http://localhost:8080/listings/new";
+    window.location.href = "/listings?new=1";
 })
 function rec_hover(rec,text){
     rec.style.webkitTransform = 'rotate(180deg) scale(1.1)';

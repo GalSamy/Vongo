@@ -109,7 +109,7 @@ newListingForm.addEventListener("submit",(function (e){
             processData: false,
             success: function(response) {
                 console.log(response)
-                window.location.href = "http://localhost:8080/listings";
+                window.location.href = "/listings?new=1";
 
             },
             error: function(xhr, status, error) {

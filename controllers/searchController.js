@@ -52,6 +52,7 @@ const search = async (req,res) => {
     const listings =await Listings.find({})
     res.render('../views/listings.ejs', {Items:{listings},
     });
+
 }
 const listing =async (req,res) => {
     let er = false;

@@ -44,6 +44,12 @@ function refreshPage() {
       }
     });
 }
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+if(urlParams.get('new')==1){
+    refreshPage()
+}
+
 socket.on('newListing',()=>{
     console.log('newListing sent!')
     refreshPage()
