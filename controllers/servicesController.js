@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const {Users, userModel} = require("../models/userModel")
 const socketIo = require('socket.io');
 const {notifyUser, newListingNotify} = require('./socketModule')
-
+const {getUserInfo,extractUserInfo,verifyUser} = require('./util')
 
 const { login } = require("./loginController")
 const express = require("express")
@@ -17,18 +17,8 @@ const Album_search = async (req,res) => {
      resp = await resp.json()
      res.send(resp.data)
 }
-function extractUserInfo(token){
-    let userJson = JSON.parse(Buffer.from(token.split('.')[1],"base64"))
-    return userJson
-}
-function verifyUser(token){
-    var verify = jwt.verify(token,process.env.JWT_SECRET_KEY)
-    return verify;
-}
-async function getUserInfo(email){
-    let user = await Users.findOne({email:email});
-    return user
-}
+
+
 var count = 0;
 // Middleware to validate user's session
 const renderForUser = async (req, res, next) => {
