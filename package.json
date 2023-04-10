@@ -24,6 +24,7 @@
     "nodemon": "^2.0.22",
     "socket.io": "^4.6.1",
     "socketio": "^1.0.0",
+    "twitter-api-v2": "^1.14.2",
     "util": "^0.12.5"
   }
 }

@@ -4,6 +4,8 @@ const fs = require('fs');
 const {newListingNotify} = require('./socketModule')
 const {Bids} = require("../models/bidModel");
 const {Users} = require("../models/userModel")
+const {tweet} = require("./twitterController")
+
 const postNewListing = async (req,res) =>{
     ////console.log(req.locals)
     if (req.locals.email === ""){
@@ -49,7 +51,7 @@ const postNewListing = async (req,res) =>{
     newlisting.photo = "/uploads/" + newlisting._id + "."+req.file.mimetype.split("/")[1]
    await newlisting.save()
    newListingNotify()
-
+    await tweet(`${newlisting.listedBy.userName} has listed a vinyl of ${a.title} for a starting bid of ${newlisting.lastBid}$ view here : https://localhost:8080/listings/${newlisting._id}`)
 }
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
