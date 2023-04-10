@@ -10,7 +10,8 @@ const userModel = new Schema({
     Orders: Array,
     Notifications: Array,
     Location: String,
-    passwordHash: String
+    passwordHash: String,
+    LocationMap: String
 });
 
 const Users = mongoose.model('User', userModel)
