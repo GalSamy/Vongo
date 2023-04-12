@@ -12,7 +12,7 @@ let CurrentUser = {
 
 const profile = async (req,res) => {
     let er = false;
-    if (req.params.userid === "@me") // /users/@me is the profile page
+    if (req.params.userid === "@me" || res.locals._id.equals(req.params.userid)) // /users/@me is the profile page
     {
         /*
         let location = res.locals.Location.replace(/ /g,"%20")
@@ -35,7 +35,7 @@ const profile = async (req,res) => {
             er = true;
         })
             if(!er)
-            res.render('../views/profile.ejs', {User: user, isProfile:false});
+            res.render('../views/profile.ejs', {User: user, isProfile:false,Pic:res.locals.LocationMap});
     }
 }
 const profileSells = (req,res) =>{

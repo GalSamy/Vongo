@@ -35,7 +35,7 @@ const postNewListing = async (req,res) =>{
         photo : "",
         albumId : picked,
         artist : artist,
-        lastBid: req.body.bid,
+        lastBid: parseInt(req.body.bid),
         name: title,
         release: release,
         closed: false
@@ -76,6 +76,7 @@ const listing =async (req,res) => {
         Songs = await Songs.json()
         let Genre = await fetch("https://api.deezer.com/genre/" + Album.genre_id)
         Genre = await Genre.json()
+
         res.render('../views/listing.ejs', {
             Item: l,
             Album: Album,

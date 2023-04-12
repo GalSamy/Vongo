@@ -19,7 +19,7 @@
 
     <link href="/css/listing.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+
     <title>Vongo</title>
 </head>
 <body>
@@ -33,6 +33,7 @@
     <p class="fs-4 ">Seller: <a class="clink" href="http://localhost:8080/users/<%=Item.listedBy._id %>"><%= Item.listedBy.userName%></a></p>
     <p class="fs-4 d-inline" id="lastbid">Last Bid : <%= Item.lastBid%>$</p> <!-- change bid -->
         <!-- Button trigger modal -->
+        <% if(locals.email) %>
         <%= console.log("locals email "+locals.email) %>
         <% console.log(JSON.stringify(locals._id) === JSON.stringify(Item.listedBy._id))%>
     <% if (JSON.stringify(locals._id) === JSON.stringify(Item.listedBy._id)) {%>
@@ -44,7 +45,7 @@
             <%}%>
         </ul>
         <%} else {%>
-99    <% if(locals.email) {%>
+    <% if(locals.email) {%>
         <button type="button" class="btn btn-primary d-inline mb-2" data-bs-toggle="modal" data-bs-target="#bidModal">
             Place A Bid
         </button>

@@ -19,7 +19,14 @@ function handleBid(listingId, bidBy){
                 $("#lastbid")[0].textContent ="Last Bid : " + response.lastBid + "$"
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText); // Handle error response
+                const response = JSON.parse(xhr.responseText)
+                if (response.msg) {
+                    console.log("error bad bid")
+                    alert(response.msg);
+                    $("#bidAmount")[0].value = "";
+                } else {
+                    alert("An error occurred. Please try again.");
+                }
             }
         })
 }
@@ -58,7 +65,8 @@ function handleAccept(listingId,bidId){
                 }
             },
             error: function(xhr, status, error) {
-                console.log(xhr.responseText); // Handle error response
+                console.log(error.msg)
+                alert(xhr.responseText); // Handle error response
             }
         })
 }
