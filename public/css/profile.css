@@ -12,9 +12,14 @@
     color: #DE681D;
     font-size: 0.5rem;
 }
+.container{
+    margin-top: 5% !important;
+    margin-left: 20% !important;
+}
 .profile{
     float: left;
 }
+
 .profile-img{
     border-radius: 50%;
     width: 15vh;

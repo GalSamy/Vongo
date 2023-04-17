@@ -6,7 +6,7 @@ buy.addEventListener("click",()=>{
     console.log("redirect")
 })
 sell.addEventListener("click", ()=>{
-    window.location.href = "/listings?new=1";
+    window.location.href = "/listings/new";
 })
 function rec_hover(rec,text){
     rec.style.webkitTransform = 'rotate(180deg) scale(1.1)';
