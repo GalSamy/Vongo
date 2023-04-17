@@ -11,8 +11,13 @@
 </head>
 <body onload="initMap('<%=User.Location%>')">
 <%= console.log("locals email "+locals.email) %>
+<header>
     <%- include('partials/_nav', {Email:locals.userName})%>
-    <div class="container w-50 float-start">
+    <%- include('partials/_side',{User:User})%>
+    
+</header>
+
+    <div class="container w-50 float-start justify-content-center">
     <div class="profile m-4 row row-cols-1">
         <div class="profile-info width-50 float-start  m-1">
     <img src= "<%=User.userPhoto%>" class="profile-img rounded-circle" id="pimg">
@@ -49,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row activities col m-4">
+            <!--<div class="row activities col m-4">
                 <ol class="list-group list-group-numbered">
                     <li class="list-group-item d-flex justify-content-between align-items-start fs-3" id="sells">
                         <div class="ms-2 me-auto">
@@ -66,7 +71,7 @@
                         <span class="badge bg-primary rounded-pill"><%=User.Orders.length%></span>
                     </li>
                 </ol>
-            </div>
+            </div>-->
         </div>
 
 
