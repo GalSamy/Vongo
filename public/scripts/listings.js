@@ -4,7 +4,7 @@ window.addEventListener("load", (event) => {
     socket.emit("joinListing")
     console.log(socket.connected)
   });
-function handleBid(listingId, bidBy){
+/*function handleBid(listingId, bidBy){
     let bidAmount = $("#bidAmount")[0].value
     console.log(bidBy)
     if (!bidAmount)
@@ -28,7 +28,7 @@ function handleBid(listingId, bidBy){
             console.log(xhr.responseText); // Handle error response
         }
         })
-}
+}*/
 function refreshPage() {
     $.ajax({
       url: '/listings',

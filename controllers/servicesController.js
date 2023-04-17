@@ -72,14 +72,14 @@ const newBid = async (req,res) => {
             amount: amount,
             listing: l
         })
-        await newBid.save()
-        console.log(newBid.bidBy)
-        l.Bids.push(newBid)
+        await NewBid.save()
+        console.log(NewBid.bidBy)
+        l.Bids.push(NewBid)
         l.lastBid = amount
         l.save()
         //notifyUser("somechecks","ykvnkl2@gmail.com")
         newListingNotify()
-        await res.send({lastBid: newBid.amount})
+        await res.send({lastBid: NewBid.amount})
     }else{
         console.log("lower bid")
         return res.status(400).json({msg : "Bid need to be bigger than last bid"})

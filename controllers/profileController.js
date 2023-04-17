@@ -40,6 +40,7 @@ const profile = async (req,res) => {
     }
 }
 const profileSells = (req,res) =>{
+    res.render("../views/sells.ejs",{User:res.locals})
 
 }
 const profileOrders = (req,res) =>{
