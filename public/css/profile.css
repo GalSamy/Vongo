@@ -30,6 +30,7 @@
     max-width: 250px;
     max-height: 250px;
 }
-#map{
-    width:clamp(200px,15vw,400px);
+#map {
+    height: 400px; /* The height is 400 pixels */
+    width: 100%; /* The width is the width of the web page */
 }

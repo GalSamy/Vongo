@@ -1,5 +1,6 @@
 const {Users} = require("../models/userModel")
 const {locals} = require("express/lib/application");
+require("dotenv").config()
 
 let CurrentUser = {
     userPhoto: "/assets/IMG_1154.jpg",
@@ -23,7 +24,7 @@ const profile = async (req,res) => {
         //move all of this to user creation and add a map photo field to user scheme
          */
         if (res.locals.email){
-        res.render('../views/profile.ejs', {User:res.locals, isProfile:true,Pic:res.locals.LocationMap});
+        res.render('../views/profile.ejs', {User:res.locals, isProfile:true, GoogleKey: process.env.GOOGLE_MAPS_KEY});
         }else{
             res.redirect("http://localhost:8080/login")
             return;
@@ -35,7 +36,7 @@ const profile = async (req,res) => {
             er = true;
         })
             if(!er)
-            res.render('../views/profile.ejs', {User: user, isProfile:false,Pic:res.locals.LocationMap});
+            res.render('../views/profile.ejs', {User: user, isProfile:false, GoogleKey: process.env.GOOGLE_MAPS_KEY});
     }
 }
 const profileSells = (req,res) =>{

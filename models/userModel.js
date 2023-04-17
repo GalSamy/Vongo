@@ -11,7 +11,6 @@ const userModel = new Schema({
     Notifications: Array,
     Location: String,
     passwordHash: String,
-    LocationMap: String
 });
 
 const Users = mongoose.model('User', userModel)

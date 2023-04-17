@@ -18,7 +18,7 @@ router.use("/admin",renderForUser,adminRouter)
 router.use("/login",renderForUser,signinRouter)
 router.use("/register",renderForUser,registerRouter)
 router.use("/listings",renderForUser,listingsRouter)
-router.use("/utils", servicesRouter)
+router.use("/utils",renderForUser, servicesRouter)
 //router.get("/search", search)
 
 

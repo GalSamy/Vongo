@@ -59,6 +59,7 @@ const renderForUser = async (req, res, next) => {
 };
 const {Bids} = require("../models/bidModel")
 const {Listings} = require("../models/listingModel")
+const fs = require("fs");
 
 const newBid = async (req,res) => {
     let amount = parseInt(req.body.bid)
@@ -84,8 +85,25 @@ const newBid = async (req,res) => {
         return res.status(400).json({msg : "Bid need to be bigger than last bid"})
     }
 }
+const ProfilePic = async (req,res) => {
+    if (!(res.locals.Email === "")){
+
+    fs.appendFile("./public/uploads/" + res.locals._id +"."+ req.file.mimetype.split("/")[1], req.file.buffer, (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            // res.send('File saved!');
+        }
+
+    });
+        let u = await Users.findById(res.locals._id)
+        u.userPhoto = "/uploads/" + u._id + "." + req.file.mimetype.split("/")[1];
+        await u.save()
+        res.json({image : "/uploads/" + u._id + "." + req.file.mimetype.split("/")[1]});
+     }
+}
 
 
 module.exports = {
-    Album_search,renderForUser,verifyUser,extractUserInfo,newBid
+    Album_search,renderForUser,verifyUser,extractUserInfo,newBid,ProfilePic
 }
