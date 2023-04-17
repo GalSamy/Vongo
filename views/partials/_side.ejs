@@ -13,7 +13,7 @@
     <script src="../scripts/side.js">
 </script>
 </head>
-<nav id="sidebarMenu"
+<nav id="sidebarMenu "
 class="collapse d-lg-block sidebar collapse bg-white"
 >
 <div class="position-sticky">
@@ -32,14 +32,14 @@ class="collapse d-lg-block sidebar collapse bg-white"
     >
    <i class="fas fa-chart-area fa-fw me-3"></i
      ><span>Sells</span>
-     <span class="badge bg-primary rounded-pill"><%=User.Sells.length%></span>
+     <span class="badge  rounded-pill"><%=User.Sells.length%></span>
 
  </a>
  <a
  id="orders"
     class="list-group-item list-group-item-action py-2 ripple" onclick="element_clicked('#orders')">
     <i class="fas fa-lock fa-fw me-3"></i><span>Orders</span>
-    <span class="badge bg-primary rounded-pill"><%=User.Orders.length%></span>
+    <span class="badge rounded-pill"><%=User.Orders.length%></span>
     </a>
  <a
  id = "listings"
