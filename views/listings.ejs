@@ -30,26 +30,35 @@
 
         <p>Parameters:</p>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <input type="checkbox" class="form-check-input" id="NameParameter">
             <label class="form-check-label" for="exampleCheck1">Name</label>
+            <input type="text" class="form-control w-50 d-none" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" id="NameField">
         </div>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck2">
+            <input type="checkbox" class="form-check-input" id="ArtistParameter">
             <label class="form-check-label" for="exampleCheck1">Artist</label>
+            <input type="text" class="form-control w-50 d-none" placeholder="Artist" aria-label="Username" aria-describedby="basic-addon1" id="ArtistField">
+
         </div>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck2">
+            <input type="checkbox" class="form-check-input" id="MinPriceParameter">
             <label class="form-check-label" for="exampleCheck1">Minimum Price</label>
+            <input type="text" class="form-control w-50 d-none" placeholder="Minimum Price" aria-label="Username" aria-describedby="basic-addon1" id="MinimumField">
+
         </div>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck2">
+            <input type="checkbox" class="form-check-input" id="MaxPriceParameter">
             <label class="form-check-label" for="exampleCheck1">Maximum Price</label>
+            <input type="text" class="form-control w-50 d-none" placeholder="Maximum Price" aria-label="Username" aria-describedby="basic-addon1" id="MaximumField">
+
         </div>
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck2">
+            <input type="checkbox" class="form-check-input" id="YearParameter">
             <label class="form-check-label" for="exampleCheck1">Published Year</label>
+            <input type="text" class="form-control w-50 d-none" placeholder="Published Year" aria-label="Username" aria-describedby="basic-addon1" id="YearField">
+
         </div>
-        <button type="submit" class="btn btn-primary search-btn col-2 h-50">Search!</button>
+        <button type="submit" class="btn btn-primary search-btn col-2 h-50" id="searchButton">Search!</button>
     </form>
 
 </div>
@@ -68,7 +77,7 @@
                     Listed By <a class="link" href="http://localhost:8080/users/<%=Items.listings[i].listedBy._id %>"><%= Items.listings[i].listedBy.userName %> </a>
                 </li>
                 <li>
-                    Last Bid : <%= Items.listings[i].lastBid %>
+                    Last Bid : <%= Items.listings[i].lastBid %> $
                 </li>
             </ul>
             <a class="btn btn-primary fw-bold" href=<%= "/listings/" +Items.listings[i].id%>>More Info</a>
