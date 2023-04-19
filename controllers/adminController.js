@@ -35,15 +35,36 @@ const promote = async (req,res) =>{
         }
     }
 }
-const demote = async (req,res) =>{
-    if (res.locals.Email !== ""){
-        if (res.locals.isAdmin){
+const demote = async (req,res) => {
+    if (res.locals.Email !== "") {
+        if (res.locals.isAdmin) {
             console.log("demote")
-            const user =await Users.findById(req.body._id)
+            const user = await Users.findById(req.body._id)
             user.isAdmin = false;
             user.save()
             res.sendStatus(200)
         }
     }
 }
-module.exports={admin,activeListings,archivedListings,statistics, promote,demote}
+    const ban = async (req, res) => {
+        if (res.locals.Email !== "") {
+            if (res.locals.isAdmin) {
+                const user = await Users.findById(req.body._id)
+                user.banned = true;
+                user.save()
+                res.sendStatus(200)
+            }
+        }
+    }
+    const unban = async (req, res) => {
+        if (res.locals.Email !== "") {
+            if (res.locals.isAdmin) {
+                const user = await Users.findById(req.body._id)
+                user.banned = false;
+                user.save()
+                res.sendStatus(200)
+            }
+        }
+    }
+
+module.exports={admin,activeListings,archivedListings,statistics, promote,demote,ban,unban}

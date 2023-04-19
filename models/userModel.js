@@ -11,7 +11,8 @@ const userModel = new Schema({
     Notifications: Array,
     Location: String,
     passwordHash: String,
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    Banned: {type : Boolean, default: false}
 });
 
 const Users = mongoose.model('User', userModel)
