@@ -24,7 +24,8 @@ function getCookie(name) {
 }
 // Check if the user is already subscribed to notifications
 const isSubscribed = localStorage.getItem('isSubscribed');
-console.log(socket.connected)
+socket.on('notification')
+console.log("not.js " +socket.connected)
 if (!isSubscribed && hasAuthToken()) {
 
     console.log("check+"+getCookie('authToken'))
@@ -33,8 +34,3 @@ if (!isSubscribed && hasAuthToken()) {
   // Set the flag to indicate that the user is subscribed
   localStorage.setItem('isSubscribed', 'true');
 }
-socket.on('notification',(message)=>{
-  console.log(message)
-    alert(message)
-})
-

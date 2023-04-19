@@ -1,3 +1,4 @@
+
 let buy = $("#buy")[0]
 let sell = $("#sell")[0]
 console.log(buy)
