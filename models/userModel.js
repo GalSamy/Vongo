@@ -11,6 +11,7 @@ const userModel = new Schema({
     Notifications: Array,
     Location: String,
     passwordHash: String,
+    isAdmin: Boolean
 });
 
 const Users = mongoose.model('User', userModel)

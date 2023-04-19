@@ -40,6 +40,7 @@ const user_creation_handler = async (req, res) => {
       email: email,
       Location: location,
       passwordHash: password_hash,
+      isAdmin: false
   });
 
   // Save the user object to the database

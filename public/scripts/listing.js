@@ -43,9 +43,16 @@ function handleDelete(listingId){
             dataType:"json",
             success:async  function(response) {
                 console.log("response:" + response)
+                refreshPage()
             },
             error: function(xhr, status, error) {
                 console.log(xhr.responseText); // Handle error response
+                const response = JSON.parse(xhr.responseText)
+                if (response.message) {
+                    alert(response.msg);
+                } else {
+                    alert("An error occurred. Please try again.");
+                }
             }
         })
 }

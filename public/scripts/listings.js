@@ -43,3 +43,57 @@ const MinimumField = $("#MinPriceField")[0]
 const MaximumField = $("#MaxPriceField")[0]
 const YearField = $("#YearField")[0]
 
+function changeState(field){
+    if (field.className === "form-control w-50"){
+        field.className = "form-control w-50 d-none"
+        field.value = ""
+    }else{
+        field.className = "form-control w-50"
+    }
+}
+
+function ListingsSearch(){
+    let parameters = []
+    let data = new FormData();
+    if (NameField.value !== ""){
+        parameters.add(name)
+        data.append("name",NameField.value)
+    }
+    if (ArtistField.value !== ""){
+        parameters.add("artist")
+        data.append("artist",NameField.value)
+    }
+    if (MinimumField.value !== ""){
+        parameters.add("minimum")
+        data.append("minimum",NameField.value)
+    }
+    if (MaximumField.value !== ""){
+        parameters.add("maximum")
+        data.append("maximum",NameField.value)
+    }
+    if (YearField.value !== ""){
+        parameters.add("release")
+        data.append("release",NameField.value)
+    }
+    $.ajax({
+        url: "/listings/",
+        type: "get",
+        data:{
+            pars: parameters,
+            data: data
+        },
+        contentType:"application/x-www-form-urlencoded",
+        dataType:"json",
+        success:async  function(response) {
+                var $response = $('<div></div>').html(response);
+                var $listingsShowcase = $response.find('#listingsShowcase');
+                $('#listingsShowcase').html($listingsShowcase.html());
+
+        },
+        error: function(xhr, status, error) {
+            console.log(error.msg)
+            alert(xhr.responseText); // Handle error response
+        }
+    })
+
+}

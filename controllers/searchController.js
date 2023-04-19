@@ -55,8 +55,19 @@ const postNewListing = async (req,res) =>{
 }
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
-    res.render('../views/listings.ejs', {Items:{listings},
-    });
+    const parameters = req.body.pars
+    const data = req.body.data
+    
+    if (res.locals.Email !== ""){
+    res.render('../views/listings.ejs', {
+        Items:{listings},
+        Admin: res.locals.isAdmin
+    })}else{
+        res.render('../views/listings.ejs', {
+            Items:{listings},
+            Admin: false
+        })}
+
 
 }
 const listing =async (req,res) => {
@@ -66,7 +77,8 @@ const listing =async (req,res) => {
         er = true;
         res.status(404).send("Resource not found. Invalid ID")
     })
-    if (!er) {
+    console.log(l === null)
+    if (l !== null) {
         const name = l.albumId
         //console.log(name)
         let Album = await fetch("https://api.deezer.com/album/" + name)
@@ -84,6 +96,8 @@ const listing =async (req,res) => {
             Genre: Genre,
             Email: res.locals.Email
         });
+    }else{
+        res.status(404).send("Resource not found. Invalid ID")
     }
 }
 
@@ -99,12 +113,16 @@ const newListing = (req,res)=>{
 const deleteListing = async (req,res) =>{
     console.log(res.locals._id)
     let l = await Listings.findById(req.body.listing)
-    if(res.locals._id.equals(l.listedBy._id)){
+    if(res.locals._id.equals(l.listedBy._id) || res.locals.isAdmin){
+        console.log("deleting")
        let bidsQuery = l.Bids
-        Listings.deleteOne({_id : l._id})
+        Listings.deleteOne({_id : l._id}).then(() => {console.log("deleted")})
         bidsQuery.forEach(b =>{
-           Bids.deleteOne({_id:b._id})
+           Bids.deleteOne({_id:b._id}).then(() => {console.log("deleted")})
         })
+        res.json({message : "success"})
+    }else{
+        res.status(400).json({message : "not an admin or listing owner"})
     }
 }
 const closeListing = async (req,res) =>{
