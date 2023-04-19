@@ -37,12 +37,8 @@ const MinimumCheck = $("#MinPriceParameter")[0]
 const MaximumCheck = $("#MaxPriceParameter")[0]
 const YearParameter = $("#YearParameter")[0]
 
-const NameField = $("#NameField")[0]
-const ArtistField = $("#ArtistField")[0]
-const MinimumField = $("#MinPriceField")[0]
-const MaximumField = $("#MaxPriceField")[0]
-const YearField = $("#YearField")[0]
 
+//:name&:artist&:minimum&:maximum&:release
 function changeState(field){
     if (field.className === "form-control w-50"){
         field.className = "form-control w-50 d-none"
@@ -53,47 +49,83 @@ function changeState(field){
 }
 
 function ListingsSearch(){
+    const NameField = $("#NameField")[0]
+    const ArtistField = $("#ArtistField")[0]
+    const MinimumField = $("#MinimumField")[0]
+    const MaximumField = $("#MaximumField")[0]
+    const YearField = $("#YearField")[0]
+    let query = ""
     let parameters = []
     let data = new FormData();
     if (NameField.value !== ""){
-        parameters.add(name)
+        parameters.push("name")
+        console.log("pushed name")
         data.append("name",NameField.value)
+        query += `?name=${NameField.value}`
+    }else{
+        query += `?name=all`
     }
     if (ArtistField.value !== ""){
-        parameters.add("artist")
-        data.append("artist",NameField.value)
+        parameters.push("artist")
+        data.append("artist",ArtistField.value)
+        query += `&artist=${ArtistField.value}`
+    }else{
+        query += `&artist=all`
     }
     if (MinimumField.value !== ""){
-        parameters.add("minimum")
-        data.append("minimum",NameField.value)
+        parameters.push("minimum")
+        data.append("minimum",MinimumField.value)
+        query += `&minimum=${MinimumField.value}`
+    }else{
+        query += `&minimum=all`
+
     }
     if (MaximumField.value !== ""){
-        parameters.add("maximum")
-        data.append("maximum",NameField.value)
+        parameters.push("maximum")
+        data.append("maximum",MaximumField.value)
+        query += `&maximum=${MaximumField.value}`
+
+    }else{
+        query += `&maximum=all`
     }
     if (YearField.value !== ""){
-        parameters.add("release")
-        data.append("release",NameField.value)
+        parameters.push("release")
+        data.append("release",YearField.value)
+        query += `&release=${YearField.value}`
+    }else{
+        query += `&release=all`
+
     }
+    //data.append("pars", parameters)
+    console.log("query" + query)
     $.ajax({
-        url: "/listings/",
-        type: "get",
-        data:{
-            pars: parameters,
-            data: data
-        },
+        url: "/listings/parameters" + query,
+        type: "GET",
         contentType:"application/x-www-form-urlencoded",
         dataType:"json",
-        success:async  function(response) {
+        processData: false,
+        success: async function(response) {
+                /*
                 var $response = $('<div></div>').html(response);
                 var $listingsShowcase = $response.find('#listingsShowcase');
                 $('#listingsShowcase').html($listingsShowcase.html());
+                 */
 
+            alert("success")
         },
         error: function(xhr, status, error) {
-            console.log(error.msg)
-            alert(xhr.responseText); // Handle error response
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.message) {
+                alert(response.message);
+            } else {
+                alert("An error occurred. Please try again.");
+            }
+
         }
     })
+
+
+
 
 }

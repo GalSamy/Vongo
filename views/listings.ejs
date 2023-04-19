@@ -59,7 +59,7 @@
             <input type="text" class="form-control w-50 d-none" placeholder="Published Year" aria-label="Username" aria-describedby="basic-addon1" id="YearField">
 
         </div>
-        <button type="submit" class="btn btn-primary search-btn col-2 h-50" id="searchButton" onclick="ListingsSearch()">Search!</button>
+        <button type="button" class="btn btn-primary search-btn col-2 h-50" id="searchButton" onclick="ListingsSearch()">Search!</button>
     </form>
 
 </div>
@@ -81,7 +81,7 @@
                     Last Bid : <%= Items.listings[i].lastBid %> $
                 </li>
             </ul>
-            <a class="btn btn-primary fw-bold" href=<%= "/listings/" +Items.listings[i].id%>>More Info</a>
+            <a class="btn btn-primary fw-bold" href=<%= "/listings/listing/" +Items.listings[i].id%>>More Info</a>
 
                 <small class="text-muted d-block m-1">Listing Id: <%= Items.listings[i].id %> </small>
                 <%if(Admin){%>

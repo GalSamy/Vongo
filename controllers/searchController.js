@@ -55,8 +55,8 @@ const postNewListing = async (req,res) =>{
 }
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
-    //const parameters = req.body.pars
-    //const data = req.body.data
+
+
 
     if (res.locals.Email !== ""){
     res.render('../views/listings.ejs', {
@@ -67,18 +67,16 @@ const search = async (req,res) => {
             Items:{listings},
             Admin: false
         })}
-
-
 }
 const listing =async (req,res) => {
     let er = false;
     const listingId = req.params.id
     const l = await Listings.findOne({_id: listingId}).catch(() => {
         er = true;
-        res.status(404).send("Resource not found. Invalid ID")
+        return res.status(404).send("Resource not found. Invalid ID")
     })
-    console.log(l === null)
-    if (l !== null) {
+    console.log(er)
+    if (!er) {
         const name = l.albumId
         //console.log(name)
         let Album = await fetch("https://api.deezer.com/album/" + name)
@@ -96,8 +94,6 @@ const listing =async (req,res) => {
             Genre: Genre,
             Email: res.locals.Email
         });
-    }else{
-        res.status(404).send("Resource not found. Invalid ID")
     }
 }
 
@@ -125,6 +121,18 @@ const deleteListing = async (req,res) =>{
         res.status(400).json({message : "not an admin or listing owner"})
     }
 }
+const parametersSearch = async (req,res) =>{
+    console.log("search")
+    if (req.params){
+        console.log("search")
+        const data = (req.query)
+        let query = {}
+        if (data.name !== "all"){
+
+        }
+        console.log(data)
+    }
+}
 const closeListing = async (req,res) =>{
     let l = await Listings.findById(req.body.listing)
     let b = await Bids.findById(req.body.bid)
@@ -145,5 +153,5 @@ const closeListing = async (req,res) =>{
     }
 }
 module.exports = {
-    search,listing,newListing,postNewListing,deleteListing,closeListing
+    search,listing,newListing,postNewListing,deleteListing,closeListing , parametersSearch
 }
