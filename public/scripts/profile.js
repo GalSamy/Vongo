@@ -9,7 +9,6 @@ sells_li[0].addEventListener("click", ()=>{
 orders_li[0].addEventListener("click", ()=>{
     console.log("orders")
 })
-let map;
 async function initMap(city) {
 // The location of Uluru
     console.log(city)

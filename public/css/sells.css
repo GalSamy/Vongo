@@ -1,9 +1,9 @@
 .infopanel{
-    position: fixed;
+    position: absolute;
     right: 0;
-    width:20rem;
-    margin-right: 50%;
+    width: 75%;
+    overflow-y: scroll;
+
 }
 #my_dataviz{
-
 }

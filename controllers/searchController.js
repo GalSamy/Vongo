@@ -148,7 +148,9 @@ const parametersSearch = async (req,res) =>{
         }
         query.closed = false
         console.log(query)
-        let listings =await Listings.find(query)
+        let listings =await Listings.find(query).catch(e => {
+            res.status(404)
+        })
         if (res.locals.Email !== ""){
             console.log("rendering")
             res.render('../views/listings.ejs', {
