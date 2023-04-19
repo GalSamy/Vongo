@@ -23,12 +23,6 @@
 <%- include('partials/_nav', {Email:locals.email}) %>
 <div class="search-bar w-75 p-3">
     <form>
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="search...">
-        </div>
-
         <p>Parameters:</p>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="NameParameter" onclick="changeState(NameField)">
@@ -89,7 +83,7 @@
                 <%}%>
         </div>
     </div>
-        <% }%>
+        <%}%>
     <%}%>
 </div>
 

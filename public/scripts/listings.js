@@ -102,22 +102,15 @@ function ListingsSearch(){
         url: "/listings/parameters" + query,
         type: "GET",
         contentType:"application/x-www-form-urlencoded",
-        dataType:"json",
         processData: false,
         success: async function(response) {
-                /*
                 var $response = $('<div></div>').html(response);
                 var $listingsShowcase = $response.find('#listingsShowcase');
                 $('#listingsShowcase').html($listingsShowcase.html());
-                 */
-
-            alert("success")
         },
         error: function(xhr, status, error) {
-            var response = JSON.parse(xhr.responseText);
-
-            if (response.message) {
-                alert(response.message);
+            if (error) {
+                alert(error);
             } else {
                 alert("An error occurred. Please try again.");
             }

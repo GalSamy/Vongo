@@ -55,9 +55,6 @@ const postNewListing = async (req,res) =>{
 }
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
-
-
-
     if (res.locals.Email !== ""){
     res.render('../views/listings.ejs', {
         Items:{listings},
@@ -122,15 +119,49 @@ const deleteListing = async (req,res) =>{
     }
 }
 const parametersSearch = async (req,res) =>{
-    console.log("search")
     if (req.params){
-        console.log("search")
         const data = (req.query)
         let query = {}
         if (data.name !== "all"){
+            query.name = {}
+            query.name.$regex = new RegExp(data.name)
+            query.name.$options = "i"
+        }
+        if (data.artist !== "all"){
+            query.artist = {}
+            query.artist.$regex = new RegExp(data.artist)
+            query.artist.$options = "i"
 
         }
-        console.log(data)
+        if (data.minimum !== "all"){
+            query.lastBid = {}
+            query.lastBid.$gt = data.minimum
+        }
+        if (data.maximum !== "all"){
+            if (data.minimum === "all"){
+
+            }
+            query.lastBid.$lt = data.maximum
+        }
+        if (data.release !== "all"){
+            query.release = data.release
+        }
+        query.closed = false
+        console.log(query)
+        let listings =await Listings.find(query)
+        if (res.locals.Email !== ""){
+            console.log("rendering")
+            res.render('../views/listings.ejs', {
+                Items:{listings},
+                Admin: res.locals.isAdmin
+            })}else{
+            console.log("rendering")
+            res.render('../views/listings.ejs', {
+                Items:{listings},
+                Admin: false
+            })}
+
+
     }
 }
 const closeListing = async (req,res) =>{
