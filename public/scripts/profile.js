@@ -53,8 +53,13 @@ newPhotoForm.addEventListener("submit", (e) =>{
         contentType: false,
         processData: false,
         success: function(response) {
-            console.log(response)
+            var res = JSON.parse(response.responseText);
 
+            console.log(response)
+            if (res.image) {
+                const img = $("#pimg")[0]
+                img.src = res.image
+            }
 
         },
         error: function(xhr, status, error) {

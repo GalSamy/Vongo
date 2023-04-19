@@ -15,7 +15,16 @@
 <div class="flex justify-content-center mt-4 userslist">
     <ul class="list-group list-group-flush">
         <% for(let i = 0; i<Users.length;i++) {%>
-        <li class="list-group-item"><a href="/users/<%=Users[i]._id%>"><%=Users[i].userName%></a>, <%=Users[i].email%> <button class="button btn btn-success">Promote To Admin</button><button class="button btn btn-danger ms-3">Ban User</button></li>
+        <li class="list-group-item">
+            <a href="/users/<%=Users[i]._id%>"><%=Users[i].userName%></a>, <%=Users[i].email%>
+            <%if(!Users[i].isAdmin){%>
+                <button class="button btn btn-warning" onclick="demoteUser('<%= Users[i]._id%>')" disabled id="demote-<%= Users[i]._id%>">Demote From Admin</button>
+                <button class="button btn btn-success" onclick="promoteUser('<%= Users[i]._id%>')" id="promote-<%= Users[i]._id%>">Promote To Admin</button>
+        <%}else{%>
+                <button class="button btn btn-warning" onclick="demoteUser('<%= Users[i]._id%>')" id="demote-<%= Users[i]._id%>">Demote From Admin</button>
+                <button class="button btn btn-success" onclick="promoteUser('<%= Users[i]._id%>')" id="promote-<%= Users[i]._id%>" disabled>Promote To Admin</button>
+            <%}%>
+            <button class="button btn btn-danger ms-3">Ban User</button></li>
         <%}%>
     </ul>
 

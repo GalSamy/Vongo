@@ -120,5 +120,5 @@ const profileListings= async(req,res) =>{
 
 
 module.exports = {
-    profile, profileSells,profileOrders,profileListings
+    profile, profileSells,profileOrders,profileListings,sellsToArray
 }

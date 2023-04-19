@@ -23,6 +23,27 @@ const statistics = async (req,res) =>{
     let users = await Users.find({})
     const listings = await Listings.find({closed:false})
     const closedlistings = await Listings.find({closed:true})
-    res.render("adminStatistics.ejs", {User:res.locals, Users:users,ActiveListingsAmount : listings.length, closedListingsAmount:closedlistings.length})
+    res.render("adminStatistics.ejs", {User:res.locals, Users:users,ActiveListingsAmount : listings.length, closedListingsAmount:closedlistings.length, ActiveListings: listings, ClosedListings: closedlistings})
 }
-module.exports={admin,activeListings,archivedListings,statistics}
+const promote = async (req,res) =>{
+    if (res.locals.Email !== ""){
+        if (res.locals.isAdmin){
+            const user =await Users.findById(req.body._id)
+            user.isAdmin = true;
+            user.save()
+            res.sendStatus(200)
+        }
+    }
+}
+const demote = async (req,res) =>{
+    if (res.locals.Email !== ""){
+        if (res.locals.isAdmin){
+            console.log("demote")
+            const user =await Users.findById(req.body._id)
+            user.isAdmin = false;
+            user.save()
+            res.sendStatus(200)
+        }
+    }
+}
+module.exports={admin,activeListings,archivedListings,statistics, promote,demote}
