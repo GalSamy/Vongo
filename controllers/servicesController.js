@@ -22,8 +22,7 @@ const Album_search = async (req,res) => {
 var count = 0;
 // Middleware to validate user's session
 const renderForUser = async (req, res, next) => {
-    console.log("renderForUser activated")
-    console.log("---------------------"+count)
+
     count++
     req.locals = {'Email':'tal'}
     res.locals = {'Email':''}
@@ -33,14 +32,14 @@ const renderForUser = async (req, res, next) => {
         let cookie = req.cookies['authToken'];
         let token = req.header('Cookie');
         token = token.replace('authToken=','')
-        console.log("token (inside renderForUser) "+ token)
+        //console.log("token (inside renderForUser) "+ token)
         const verified = jwt.verify(token, jwtSecretKey);
         if(verified){
             let userJson = extractUserInfo(token)
             let email = userJson['email']
             let userInfo = await getUserInfo(email)
 
-            console.log(userInfo)
+            //console.log(userInfo)
            // console.log("email is: "+email)
             res.locals = userInfo
             next()
@@ -78,7 +77,7 @@ const newBid = async (req,res) => {
         l.Bids.push(NewBid)
         l.lastBid = amount
         l.save()
-        //notifyUser("somechecks","ykvnkl2@gmail.com")
+        notifyUser("somechecks","ykvnkl2@gmail.com")
         newListingNotify()
         await res.send({lastBid: NewBid.amount})
     }else{

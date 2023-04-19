@@ -1,4 +1,27 @@
 const socket = io()
+// Check if the user is already subscribed to notifications
+const isSubscribed = localStorage.getItem('isSubscribed');
+if (!isSubscribed && hasAuthToken()) {
+
+    console.log("check+"+getCookie('authToken'))
+  // Subscribe to notifications for the current user
+  socket.emit('subscribe', getCookie('authToken'));
+  // Set the flag to indicate that the user is subscribed
+  localStorage.setItem('isSubscribed', 'true');
+}
+
+socket.on('connect', () => {
+  socket.on('notifications',(notification)=>{
+    console.log('yesss')
+    alert(notification)
+  })
+  console.log('Connected to server');
+});
+
+socket.on('disconnect', () => {
+  console.log('Disconnected from server');
+});
+
 function hasAuthToken() {
     const cookies = document.cookie.split('; ');
     for (const cookie of cookies) {
@@ -9,6 +32,7 @@ function hasAuthToken() {
     }
     return false;
   }
+  
 function getCookie(name) {
     const cookies = document.cookie.split(';');
   
@@ -21,16 +45,4 @@ function getCookie(name) {
         return cookie.substring(name.length + 1, cookie.length);
       }
     }
-}
-// Check if the user is already subscribed to notifications
-const isSubscribed = localStorage.getItem('isSubscribed');
-socket.on('notification')
-console.log("not.js " +socket.connected)
-if (!isSubscribed && hasAuthToken()) {
-
-    console.log("check+"+getCookie('authToken'))
-  // Subscribe to notifications for the current user
-  socket.emit('subscribe', getCookie('authToken'));
-  // Set the flag to indicate that the user is subscribed
-  localStorage.setItem('isSubscribed', 'true');
 }
