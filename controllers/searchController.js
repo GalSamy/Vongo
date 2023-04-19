@@ -112,6 +112,9 @@ const closeListing = async (req,res) =>{
     let b = await Bids.findById(req.body.bid)
     if(l && res.locals._id.equals(l.listedBy._id)){
         l.closed = true
+        l.acceptedBid = b.amount
+        l.acceptedBidDate = b.date
+        l.acceptedBidder = b.bidBy.userName
         l.save()
         let seller = await Users.findById(l.listedBy._id)
         let bidder = await Users.findById(b.bidBy._id)

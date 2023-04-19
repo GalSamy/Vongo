@@ -1,4 +1,4 @@
-<head>
+<head >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -9,10 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
     <link href="/css/side.css" rel="stylesheet">
-    <script src="../scripts/nav.js"></script>
-    <script src="../scripts/side.js">
-</script>
-</head>
+    <script src="/scripts/nav.js"></script>
+    <script src="/scripts/side.js"></script>
+</head >
 <nav id="sidebarMenu "
 class="collapse d-lg-block sidebar collapse bg-white"
 >
@@ -20,7 +19,7 @@ class="collapse d-lg-block sidebar collapse bg-white"
 <div class="list-group list-group-flush mx-3 mt-4">
  <a
  id="profile"
-    class="list-group-item list-group-item-action py-2 ripple active"
+    class="list-group-item list-group-item-action py-2 ripple"
     aria-current="true" onclick="element_clicked('#profile')"
     >
    <i class="fas fa-tachometer-alt fa-fw me-3"></i
@@ -28,6 +27,7 @@ class="collapse d-lg-block sidebar collapse bg-white"
  </a>
  <a
     id="sells"
+    href="/users/@me/sells"
     class="list-group-item list-group-item-action py-2 ripple" onclick="element_clicked('#sells')"
     >
    <i class="fas fa-dollar-sign	 fa-fw me-3"></i

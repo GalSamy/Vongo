@@ -9,6 +9,9 @@ const listingModel = new Schema({
     name: String,
     closed:{type : Boolean, Default: false},
     lastBid: Number, //change to bid scheme
+    acceptedBidDate:Date,
+    acceptedBid:Number,
+    acceptedBidder:String,
     artist: String,
     release: String,
     Bids: Array

@@ -1,15 +1,9 @@
 const {Users} = require("../models/userModel")
+const {Listings} = require("../models/listingModel")
+
 const {locals} = require("express/lib/application");
 require("dotenv").config()
 
-let CurrentUser = {
-    userPhoto: "/assets/IMG_1154.jpg",
-    userId: "123",
-    userName: "Gal Samy",
-    Location: "Rishon Lezion, Israel",
-    Sells: [{},{},{}],
-    Orders: [{},{},{}]
-} // get from cookies or smth
 
 const profile = async (req,res) => {
     let er = false;
@@ -26,7 +20,7 @@ const profile = async (req,res) => {
         if (res.locals.email){
         res.render('../views/profile.ejs', {User:res.locals, isProfile:true, GoogleKey: process.env.GOOGLE_MAPS_KEY});
         }else{
-            res.redirect("http://localhost:8080/login")
+            res.redirect("/login")
             return;
         }
     }else {
@@ -39,8 +33,42 @@ const profile = async (req,res) => {
             res.render('../views/profile.ejs', {User: user, isProfile:false, GoogleKey: process.env.GOOGLE_MAPS_KEY});
     }
 }
-const profileSells = (req,res) =>{
-    res.render("../views/sells.ejs",{User:res.locals})
+const sellsToArray = (sells) => {
+    data = [
+      { month: "Jan", sales: 0 },
+      { month: "Feb", sales: 0 },
+      { month: "Mar", sales: 0 },
+      { month: "Apr", sales: 0 },
+      { month: "May", sales: 0 },
+      { month: "Jun", sales: 0 },
+      { month: "Jul", sales: 0 },
+      { month: "Aug", sales: 0 },
+      { month: "Sep", sales: 0 },
+      { month: "Oct", sales: 0 },
+      { month: "Nov", sales: 0 },
+      { month: "Dec", sales: 0 },
+    ];
+    console.log("month" +sells[0].acceptedBidDate.getMonth())
+    sells.forEach((sale) => {
+        data[sale.acceptedBidDate.getMonth()].sales++;
+    });
+    console.log(data)
+    return data;
+  };
+  
+const profileSells = async(req,res) =>{
+    //const sells =await Listings.find({closed : true, "listedBy.userName":res.locals.userName})
+    const user = await Users.findOne({ userName: res.locals.userName }).select('Sells');
+    const sells = user.Sells
+    s=[]
+    if (sells.length)
+        s = sellsToArray(sells)
+    res.render("../views/sells.ejs",{
+        util:sellsToArray,
+        User:res.locals,
+        data:s,
+        Items:sells
+    })
 
 }
 const profileOrders = (req,res) =>{
@@ -48,5 +76,5 @@ const profileOrders = (req,res) =>{
 }
 
 module.exports = {
-    profile, profileSells,profileOrders
+    profile, profileSells,profileOrders,sellsToArray
 }

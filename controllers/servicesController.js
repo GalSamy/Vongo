@@ -69,6 +69,7 @@ const newBid = async (req,res) => {
     if (amount > l.lastBid) {
         let NewBid = new Bids({
             bidBy: bb,
+            date:req.body.date,
             amount: amount,
             listing: l
         })

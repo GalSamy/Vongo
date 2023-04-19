@@ -8,6 +8,7 @@ function handleBid(listingId, bidBy){
             url: "/utils/newBid/",
             type: 'Post',
             data:{
+                date:(new Date()),
                 bid:bidAmount,
                 listing: listingId,
                 bidBy: bidBy
@@ -48,14 +49,14 @@ function handleDelete(listingId){
             }
         })
 }
-function handleAccept(listingId,bidId){
+function handleAccept(listingId,bidId,date){
     $.ajax(
         {
             url: "/listings/close/",
             type: 'post',
             data:{
                 listing: listingId,
-                bid: bidId
+                bid: bidId,
             },
             contentType:"application/x-www-form-urlencoded",
             dataType:"json",

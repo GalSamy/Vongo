@@ -41,7 +41,7 @@
         <ul>
             <% for(let i = 0; i < Item.Bids.length; i++){%>
             <li><%=Item.Bids[i].bidBy.userName%> put a bid of <%=Item.Bids[i].amount%>$</li>
-            <button class="btn btn-success" onclick="handleAccept(<%= JSON.stringify(Item._id)%>, <%= JSON.stringify(Item.Bids[i]._id)%>)">Accept Bid</button>
+            <button class="btn btn-success" onclick="handleAccept(<%= JSON.stringify(Item._id)%>, <%= JSON.stringify(Item.Bids[i]._id)%>, <%= JSON.stringify(Item.Bids[i].date)%>)">Accept Bid</button>
             <%}%>
         </ul>
         <%} else {%>
