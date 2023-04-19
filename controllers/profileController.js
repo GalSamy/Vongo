@@ -55,7 +55,28 @@ const sellsToArray = (sells) => {
     console.log(data)
     return data;
   };
-  
+const ordersToArray = (orders) => {
+    data = [
+      { month: "Jan", orders: 0 },
+      { month: "Feb", orders: 0 },
+      { month: "Mar", orders: 0 },
+      { month: "Apr", orders: 0 },
+      { month: "May", orders: 0 },
+      { month: "Jun", orders: 0 },
+      { month: "Jul", orders: 0 },
+      { month: "Aug", orders: 0 },
+      { month: "Sep", orders: 0 },
+      { month: "Oct", orders: 0 },
+      { month: "Nov", orders: 0 },
+      { month: "Dec", orders: 0 },
+    ];
+    console.log("month" +orders[0].acceptedBidDate.getMonth())
+    orders.forEach((sale) => {
+        data[sale.acceptedBidDate.getMonth()].orders++;
+    });
+    console.log(data)
+    return data;
+  };
 const profileSells = async(req,res) =>{
     //const sells =await Listings.find({closed : true, "listedBy.userName":res.locals.userName})
     const user = await Users.findOne({ userName: res.locals.userName }).select('Sells');
@@ -71,8 +92,19 @@ const profileSells = async(req,res) =>{
     })
 
 }
-const profileOrders = (req,res) =>{
-
+const profileOrders = async(req,res) =>{
+    const user = await Users.findOne({ userName: res.locals.userName }).select('Orders');
+    const orders = user.Orders
+    console.log(orders + orders.length)
+    s=[]
+    if (orders.length)
+        s = ordersToArray(orders)
+    res.render("../views/orders.ejs",{
+        util:ordersToArray,
+        User:res.locals,
+        data:s,
+        Items:orders
+    })
 }
 
 module.exports = {
