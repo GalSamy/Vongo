@@ -55,9 +55,9 @@ const postNewListing = async (req,res) =>{
 }
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
-    const parameters = req.body.pars
-    const data = req.body.data
-    
+    //const parameters = req.body.pars
+    //const data = req.body.data
+
     if (res.locals.Email !== ""){
     res.render('../views/listings.ejs', {
         Items:{listings},

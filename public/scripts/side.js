@@ -1,3 +1,4 @@
+
 function load(){
     ids = ["#sells","#orders","#listings","#profile"]
 ids.forEach(element => {
@@ -10,3 +11,5 @@ $(window.Clicked).addClass('active');
 function element_clicked(id){
     window.Clicked = id;
 }
+
+

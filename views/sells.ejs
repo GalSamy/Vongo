@@ -17,9 +17,10 @@
     <script>
         window.data = <%- JSON.stringify(data) %>;
       </script>
-    <%- include('partials/_side',{User:User})%>
-    <%- include('partials/_nav', {Email:locals.userName})%>
+
 </header>
+<%- include('partials/_side',{User:User})%>
+<%- include('partials/_nav', {Email:locals.userName})%>
 <div class="infopanel">
 <div class="row xl-4 l-3 m-2  ml-8 s-1" id="sellsShowcase">
 <% if (Items.length > 0) {%>
@@ -38,7 +39,7 @@
                     Accepted Bid : <%= Items[i].acceptedBid %> $
                 </li>
                 <li>
-                    Date : <%= (Items[i].acceptedBidDate.getUTCDate()) + '/' +  (Items[i].acceptedBidDate.getUTCMonth()+1) + '/' +  Items[i].acceptedBidDate.getUTCFullYear()%>   
+                    Date : <%= (Items[i].acceptedBidDate.getUTCDate()) + '/' +  (Items[i].acceptedBidDate.getUTCMonth()+1) + '/' +  Items[i].acceptedBidDate.getUTCFullYear()%>
                 </li>
             </ul>
             <a class="btn btn-primary fw-bold" href=<%= "/listings/" +Items[i]._id%>>More Info</a>

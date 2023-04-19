@@ -18,18 +18,17 @@ class="collapse d-lg-block sidebar collapse bg-white"
 <div class="position-sticky">
 <div class="list-group list-group-flush mx-3 mt-4">
  <a
+ href="/users/@me"
  id="profile"
     class="list-group-item list-group-item-action py-2 ripple"
-    aria-current="true" onclick="element_clicked('#profile')"
-    >
-   <i class="fas fa-tachometer-alt fa-fw me-3"></i
+    onclick="element_clicked('#profile')">
+   <i class="fas fa-tachometer-alt fa-fw me-3 "></i
      ><span>Profile Dash</span>
  </a>
  <a
     id="sells"
     href="/users/@me/sells"
-    class="list-group-item list-group-item-action py-2 ripple" onclick="element_clicked('#sells')"
-    >
+    class="list-group-item list-group-item-action py-2 ripple " onclick="element_clicked('#sells')">
    <i class="fas fa-dollar-sign	 fa-fw me-3"></i
      ><span>Sells</span>
      <span class="badge  rounded-pill"><%=User.Sells.length%></span>
@@ -37,13 +36,13 @@ class="collapse d-lg-block sidebar collapse bg-white"
  </a>
  <a
  id="orders"
-    class="list-group-item list-group-item-action py-2 ripple" onclick="element_clicked('#orders')">
+    class="list-group-item list-group-item-action py-2 ripple " onclick="element_clicked('#orders')">
     <i class="fa fa-cart-plus fa-fw me-3"></i><span>Orders</span>
     <span class="badge rounded-pill"><%=User.Orders.length%></span>
     </a>
  <a
  id = "listings"
-    class="list-group-item list-group-item-action py-2 ripple" onclick="element_clicked('#listings')"
+    class="list-group-item list-group-item-action py-2 ripple " onclick="element_clicked('#listings')"
     ><i class="fas fa-chart-line fa-fw me-3"></i
    ><span>Listings</span></a
    >
