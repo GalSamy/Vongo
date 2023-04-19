@@ -106,7 +106,19 @@ const profileOrders = async(req,res) =>{
         Items:orders
     })
 }
+const profileListings= async(req,res) =>{
+    console.log(res.locals.userName)
+    let listings = await Listings.find({ "listedBy.userName": res.locals.userName })
+    listings = listings.filter((listing)=> listing.closed==false)
+    console.log("listings"+listings);
+    s=[]
+    res.render("../views/profileListings.ejs",{
+        User:res.locals,
+        Items:listings
+    })
+}
+
 
 module.exports = {
-    profile, profileSells,profileOrders,sellsToArray
+    profile, profileSells,profileOrders,profileListings
 }

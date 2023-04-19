@@ -139,7 +139,7 @@ const parametersSearch = async (req,res) =>{
         }
         if (data.maximum !== "all"){
             if (data.minimum === "all"){
-
+                query.lastBid = {}
             }
             query.lastBid.$lt = data.maximum
         }

@@ -36,12 +36,14 @@ class="collapse d-lg-block sidebar collapse bg-white"
  </a>
  <a
  id="orders"
+ href="/users/@me/orders"
     class="list-group-item list-group-item-action py-2 ripple " onclick="element_clicked('#orders')">
     <i class="fa fa-cart-plus fa-fw me-3"></i><span>Orders</span>
     <span class="badge rounded-pill"><%=User.Orders.length%></span>
     </a>
  <a
  id = "listings"
+ href="/users/@me/listings"
     class="list-group-item list-group-item-action py-2 ripple " onclick="element_clicked('#listings')"
     ><i class="fas fa-chart-line fa-fw me-3"></i
    ><span>Listings</span></a
