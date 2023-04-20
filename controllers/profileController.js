@@ -86,7 +86,7 @@ const profileSells = async(req,res) =>{
         console.log(users[i]._id + "->" + users[i])
     }
     //const sells =await Listings.find({closed : true, "listedBy.userName":res.locals.userName})
-    const user = await Users.findOne({ userName: res.locals.userName }).select('Sells');
+    const user = await Users.findOne({ userName: res.locals.userName }).populate("Sells");
     const sells = user.Sells
     s=[]
     if (sells.length)
@@ -106,7 +106,6 @@ const profileOrders = async(req,res) =>{
     const user = await Users.findOne({ userName: res.locals.userName }).populate('Orders').exec();
     const orders = user.Orders;
 
-    console.log("populated " + orders[0])
     s=[]
     if (orders.length)
         s = ordersToArray(orders)
