@@ -36,7 +36,7 @@ function newListingNotify(){
 }
 async function notifyUser(notification,targetEmail){
   console.log("--------"+notification+targetEmail)
-   io.to(`notifications-${targetEmail}`).emit(`notifications`,notification)
+   io.to(`notifications-${targetEmail}`).emit(`notifications`,JSON.stringify(notification))
 }
 module.exports = {
     setupSocketListeners,newListingNotify,notifyUser,

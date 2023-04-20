@@ -78,7 +78,15 @@ const newBid = async (req,res) => {
         l.Bids.push(NewBid._id)
         l.lastBid = amount
         l.save()
-        notifyUser(bb.userName + " bidded "+amount+"$" + " on your track: "+listing.name,listing.listedBy.email)
+        let txt  = " bidded "+amount+"$" + " on your track: ";
+        let notification = {
+            'txt':txt,
+            'bidder':bb._id,
+            'bidderName':bb.userName,
+            'listing': l._id,
+            'listingName':l.name
+        }
+        notifyUser(notification,listing.listedBy.email)
         newListingNotify()
         await res.send({lastBid: NewBid.amount})
     }else{

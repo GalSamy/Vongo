@@ -113,7 +113,7 @@ const listing =async (req,res) => {
             Album: Album,
             Songs: Songs.data,
             Genre: Genre,
-            Email: res.locals.Email,
+            Email: res.locals.email,
             Bids : arr,
             userBidMap: userBidMap,
             seller: seller
@@ -124,7 +124,7 @@ const listing =async (req,res) => {
 const newListing = (req,res)=>{
     if (res.locals.Email !== "") {
         res.render("../views/newListing.ejs", {
-            Email: res.locals.Email
+            Email: res.locals.email
         });
     }else{
         res.redirect("/login")
@@ -204,7 +204,7 @@ const parametersSearch = async (req,res) =>{
     }
 }
 const closeListing = async (req,res) =>{
-    let l = await Listings.findById(req.body.listing)
+    let l = await Listings.findById(req.body.listing).populate('listedBy')
     let b = await Bids.findById(req.body.bid)
     if(l && res.locals._id.equals(l.listedBy._id)){
         l.closed = true
@@ -219,7 +219,15 @@ const closeListing = async (req,res) =>{
         bidder.Orders.push(l)
         bidder.save()
         res.send({message : "sell completed"})
-        notifyUser(seller.userName + " accepted your "+b.amount+"$ bid on: "+l.name,bidder.email)
+        let txt  = " accepted your "+b.amount+"$" + " bid on: ";
+        let notification = {
+            'txt':txt,
+            'bidder':l.listedBy._id,
+            'bidderName':l.listedBy.userName,
+            'listing': l._id,
+            'listingName':l.name
+        }
+        notifyUser(notification,bidder.email)
         newListingNotify()
     }
 }
