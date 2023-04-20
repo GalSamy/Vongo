@@ -25,8 +25,8 @@
                             Seller: <a class="link" href="/users/<%=Items.listings[i].listedBy%>"><%= listingsUsers.get(Items.listings[i]._id.toString()).userName %> </a>
                         </li>
                         <li>
-                            <%- console.log("----------------------user " + idusers.get(Items.listings[i].acceptedBidder.toString()))%>
-                            Buyer: <a class="link" href="/users/<%=Items.listings[i].acceptedBidder%>"><%= idusers.get(Items.listings[i].acceptedBidder.toString()).userName%> </a>
+                            <%- console.log("----------------------user " + idToUserMap.get(Items.listings[i].acceptedBidder.toString()) )%>
+                            Buyer: <a class="link" href="/users/<%=Items.listings[i].acceptedBidder%>"><%= idToUserMap.get(Items.listings[i].acceptedBidder.toString()).userName%> </a>
                         </li>
                         <li>
                             Price : <%= Items.listings[i].acceptedBid %> $
