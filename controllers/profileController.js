@@ -102,20 +102,27 @@ const profileSells = async(req,res) =>{
 
 }
 const profileOrders = async(req,res) =>{
-    /*const user = await Users.findOne({ userName: res.locals.userName }).select('Orders');
+    let listings = await Listings.find({})
+    const user = await Users.findOne({ userName: res.locals.userName }).select('Orders');
     const orders = user.Orders
     console.log(orders + orders.length)
     s=[]
     if (orders.length)
         s = ordersToArray(orders)
+    let listingsUsers = new Map()
+    for(let i = 0; i < listings.length; i++){
+        listingsUsers.set(listings[i]._id.toString(),await Users.findById(listings[i].listedBy))
+    }
+
     res.render("../views/orders.ejs",{
         util:ordersToArray,
         User:res.locals,
         data:s,
-        Items:orders
+        Items:orders,
+        listingsUsers: listingsUsers
     })
 
-     */
+
 }
 const profileListings= async(req,res) =>{
     console.log(res.locals.userName)
@@ -132,20 +139,18 @@ const profileListings= async(req,res) =>{
             let bid = await Bids.findById(b)
             console.log("bid" + bid)
             arr.push(bid)
-
             userBidMap.set(bid._id, await Users.findById(bid.bidBy))
             console.log(bid._id+ "->" +await Users.findById(bid.bidBy))
         }
-
         map.set(l._id, arr)
-        console.log("arr " + arr.length)
-    }
 
+    }
 
     res.render("../views/profileListings.ejs",{
         User:res.locals,
         Items:listings,
         ListingsBidsMap : map,
+        userBidMap: userBidMap
     })
 }
 

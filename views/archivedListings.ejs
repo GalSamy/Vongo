@@ -22,10 +22,11 @@
                     <p class="card-text fs-5"><%= Items.listings[i].artist %>, <%= Items.listings[i].release %></p>
                     <ul>
                         <li>
-                            Seller: <a class="link" href="/users/<%=Items.listings[i].listedBy._id%>"><%= Items.listings[i].listedBy.userName %> </a>
+                            Seller: <a class="link" href="/users/<%=Items.listings[i].listedBy%>"><%= listingsUsers.get(Items.listings[i]._id.toString()).userName %> </a>
                         </li>
                         <li>
-                            Buyer: <a class="link" href="/users/<%=Items.listings[i].Bids[Items.listings[i].Bids.length -1].bidBy._id%>"><%= Items.listings[i].acceptedBidder%> </a>
+                            <%- console.log("----------------------user " + idusers.get(Items.listings[i].acceptedBidder.toString()))%>
+                            Buyer: <a class="link" href="/users/<%=Items.listings[i].acceptedBidder%>"><%= idusers.get(Items.listings[i].acceptedBidder.toString()).userName%> </a>
                         </li>
                         <li>
                             Price : <%= Items.listings[i].acceptedBid %> $

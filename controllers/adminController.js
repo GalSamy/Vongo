@@ -10,42 +10,70 @@ const admin = async (req,res)=>{
 const activeListings = async (req,res) =>{
     let users = await Users.find({})
     const listings = await Listings.find({closed:false})
+    let listingsUsers = new Map()
+    for(let i = 0; i < listings.length; i++){
+        listingsUsers.set(listings[i]._id.toString(),await Users.findById(listings[i].listedBy))
+    }
+
     const closedlistings = await Listings.find({closed:true})
-    res.render("activeListings.ejs", {User:res.locals,Items : {listings}, Admin: true, usersAmount:users.length,closedListingsAmount: closedlistings.length})
+    res.render("activeListings.ejs", {User:res.locals,Items : {listings}, Admin: true, usersAmount:users.length,closedListingsAmount: closedlistings.length, listingsUsers :listingsUsers})
 }
-const archivedListings = async (req,res) =>{
+const archivedListings = async (req,res) => {
     let users = await Users.find({})
-    const listings = await Listings.find({closed:true})
-    const Activelistings = await Listings.find({closed:false})
-    res.render("ArchivedListings.ejs", {User:res.locals,Items : {listings}, Admin: true, usersAmount:users.length, activeListingsAmount:Activelistings.length})
-}
-const statistics = async (req,res) =>{
-    let users = await Users.find({})
-    const listings = await Listings.find({closed:false})
-    const closedlistings = await Listings.find({closed:true})
-    res.render("adminStatistics.ejs", {User:res.locals, Users:users,ActiveListingsAmount : listings.length, closedListingsAmount:closedlistings.length, ActiveListings: listings, ClosedListings: closedlistings})
-}
-const promote = async (req,res) =>{
-    if (res.locals.Email !== ""){
-        if (res.locals.isAdmin){
-            const user =await Users.findById(req.body._id)
-            user.isAdmin = true;
-            user.save()
-            res.sendStatus(200)
+    const listings = await Listings.find({closed: true})
+    let listingsUsers = new Map()
+    for (let i = 0; i < listings.length; i++) {
+        listingsUsers.set(listings[i]._id.toString(), await Users.findById(listings[i].listedBy))
+    }
+    let idusers = new Map()
+    for (let i = 0; i < users.length; i++) {
+        idusers.set(users[i]._id.toString(),  Users[i])
+    }
+        const Activelistings = await Listings.find({closed: false})
+        res.render("ArchivedListings.ejs", {
+            User: res.locals,
+            Items: {listings},
+            Admin: true,
+            usersAmount: users.length,
+            activeListingsAmount: Activelistings.length,
+            listingsUsers:listingsUsers,
+            idusers: idusers
+        })
+    }
+    const statistics = async (req, res) => {
+        let users = await Users.find({})
+        const listings = await Listings.find({closed: false})
+        const closedlistings = await Listings.find({closed: true})
+        res.render("adminStatistics.ejs", {
+            User: res.locals,
+            Users: users,
+            ActiveListingsAmount: listings.length,
+            closedListingsAmount: closedlistings.length,
+            ActiveListings: listings,
+            ClosedListings: closedlistings,
+        })
+    }
+    const promote = async (req, res) => {
+        if (res.locals.Email !== "") {
+            if (res.locals.isAdmin) {
+                const user = await Users.findById(req.body._id)
+                user.isAdmin = true;
+                user.save()
+                res.sendStatus(200)
+            }
         }
     }
-}
-const demote = async (req,res) => {
-    if (res.locals.Email !== "") {
-        if (res.locals.isAdmin) {
-            console.log("demote")
-            const user = await Users.findById(req.body._id)
-            user.isAdmin = false;
-            user.save()
-            res.sendStatus(200)
+    const demote = async (req, res) => {
+        if (res.locals.Email !== "") {
+            if (res.locals.isAdmin) {
+                console.log("demote")
+                const user = await Users.findById(req.body._id)
+                user.isAdmin = false;
+                user.save()
+                res.sendStatus(200)
+            }
         }
     }
-}
     const ban = async (req, res) => {
         if (res.locals.Email !== "") {
             if (res.locals.isAdmin) {
@@ -66,5 +94,6 @@ const demote = async (req,res) => {
             }
         }
     }
+
 
 module.exports={admin,activeListings,archivedListings,statistics, promote,demote,ban,unban}

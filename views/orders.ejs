@@ -32,7 +32,7 @@
             <p class="card-text fs-5"><%= Items[i].artist %>, <%= Items[i].release %></p>
             <ul>
                 <li>
-                    Seller: <a class="link" href="/users/<%=Items[i].acceptedBidder%>"><%= Items[i].listedBy.userName %> </a>
+                    Seller: <a class="link" href="/users/<%=Items[i].acceptedBidder%>"><%= listingsUsers.get(Items[i]._id.toString()).userName %> </a>
                 </li>
                 <li>
                     Price : <%= Items[i].acceptedBid %> $

@@ -22,7 +22,7 @@
                         <p class="card-text fs-5"><%= Items.listings[i].artist %>, <%= Items.listings[i].release %></p>
                         <ul>
                             <li>
-                                Listed By <a class="link" href="/users/<%=Items.listings[i].listedBy._id %>"><%= Items.listings[i].listedBy.userName %> </a>
+                                Listed By <a class="link" href="/users/<%=Items.listings[i].listedBy %>"><%= listingsUsers.get(Items.listings[i]._id.toString()).userName %> </a>
                             </li>
                             <li>
                                 Last Bid : <%= Items.listings[i].lastBid %> $

@@ -55,14 +55,20 @@ const postNewListing = async (req,res) =>{
 }
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
+    let listingsUsers = new Map()
+    for(let i = 0; i < listings.length; i++){
+        listingsUsers.set(listings[i]._id.toString(),await Users.findById(listings[i].listedBy))
+    }
     if (res.locals.Email !== ""){
     res.render('../views/listings.ejs', {
         Items:{listings},
-        Admin: res.locals.isAdmin
+        Admin: res.locals.isAdmin,
+        usersMap: listingsUsers
     })}else{
         res.render('../views/listings.ejs', {
             Items:{listings},
-            Admin: false
+            Admin: false,
+            usersMap: listingsUsers
         })}
 }
 const listing =async (req,res) => {
@@ -72,8 +78,6 @@ const listing =async (req,res) => {
         er = true;
         return res.status(404).send("Resource not found. Invalid ID")
     })
-
-
     console.log(er)
     if (!er) {
         let map = new Map()
@@ -82,10 +86,8 @@ const listing =async (req,res) => {
         let arr = []
         for (const b of l.Bids) {
             let bid = await Bids.findById(b)
-            console.log("bid" + bid)
             arr.push(bid)
             userBidMap.set(bid._id, await Users.findById(bid.bidBy))
-            console.log(bid._id+ "->" +await Users.findById(bid.bidBy))
         }
 
         console.log("arr " + arr.length)
@@ -137,6 +139,11 @@ const deleteListing = async (req,res) =>{
     }
 }
 const parametersSearch = async (req,res) =>{
+    const listings =await Listings.find({closed : false})
+    let listingsUsers = new Map()
+    for(let i = 0; i < listings.length; i++){
+        listingsUsers.set(listings[i]._id.toString(),await Users.findById(listings[i].listedBy))
+    }
     if (req.params){
         const data = (req.query)
         let query = {}
@@ -173,12 +180,17 @@ const parametersSearch = async (req,res) =>{
             console.log("rendering")
             res.render('../views/listings.ejs', {
                 Items:{listings},
-                Admin: res.locals.isAdmin
+                Admin: res.locals.isAdmin,
+                usersMap: listingsUsers
+
+
             })}else{
             console.log("rendering")
             res.render('../views/listings.ejs', {
                 Items:{listings},
-                Admin: false
+                Admin: false,
+                usersMap: listingsUsers
+
             })}
 
 
