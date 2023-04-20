@@ -227,6 +227,7 @@ const closeListing = async (req,res) =>{
             'listing': l._id,
             'listingName':l.name
         }
+        console.log(notification)
         notifyUser(notification,bidder.email)
         newListingNotify()
     }

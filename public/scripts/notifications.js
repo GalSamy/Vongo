@@ -25,7 +25,7 @@ socket.on('notifications',(notification)=>{
 })
 function newNotification(notification){
   notification = JSON.parse(notification)
-  console.log(notifications.length)
+  console.log("yess"+notifications.length)
   $('#notifications_counter').text(notifications.length)
 
   showNotification(notification.bidder,notification.bidderName,notification.listing,notification.listingName,notification.txt)
