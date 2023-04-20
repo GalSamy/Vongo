@@ -1,4 +1,4 @@
-console.log("type "+(typeof socket))
+let notifications = []
 if(typeof socket=== "undefined")
 {
     var socket = io();
@@ -7,9 +7,7 @@ if(typeof socket=== "undefined")
 
 socket.on('connect', () => {
   console.log('Connected to server');
-
-  const isSubscribed = localStorage.getItem('isSubscribed');
-  if (isSubscribed && hasAuthToken()) {
+  if (hasAuthToken()) {
     console.log("check+"+getCookie('authToken'))
     // Re-subscribe to notifications for the current user
     socket.emit('subscribe', getCookie('authToken'));
@@ -22,9 +20,20 @@ socket.on('disconnect', () => {
 
 socket.on('notifications',(notification)=>{
   console.log('yesss')
-  showNotification(notification)
+  notifications.push(notification)
+  newNotification(notification)
 })
+function newNotification(notification){
+  console.log(notifications.length)
+  $('#notifications_counter').text(notifications.length)
+  showNotification(notification)
+}
+function notifications_reset(){
+  notifications =[];
+  $('#modal_ul').empty();
+  $('#notifications_counter').text(0)
 
+}
 function showNotification(notification){
   $('#modal_ul').append(`<li>${notification}</li>`)
 }

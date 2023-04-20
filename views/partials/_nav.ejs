@@ -24,7 +24,7 @@
         <a class="navbar-brand ml-4" href="#"><%=locals.Email%></a>
         <button type="button" class="btn btn-primary cbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            <span class="badge rounded-pill badge-notification bg-danger" id = "notifications_counter">0</span>
         </button>
 
         <!-- Modal -->
@@ -33,7 +33,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Notifications</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" onclick="notifications_reset()" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <ul id = "modal_ul">

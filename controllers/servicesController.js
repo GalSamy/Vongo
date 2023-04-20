@@ -65,6 +65,7 @@ const newBid = async (req,res) => {
     console.log(req.body.bidBy)
     let l = await Listings.findById(req.body.listing)
     let bb = await Users.findById(req.body.bidBy)
+    const listing = await Listings.findById(req.body.listing).populate('listedBy')
     if (amount > l.lastBid) {
         let NewBid = new Bids({
             bidBy: bb,
@@ -77,7 +78,7 @@ const newBid = async (req,res) => {
         l.Bids.push(NewBid._id)
         l.lastBid = amount
         l.save()
-        notifyUser("somechecks","ykvnkl3@gmail.com")
+        notifyUser(bb.userName + " bidded "+amount+"$" + " on your track: "+listing.name,listing.listedBy.email)
         newListingNotify()
         await res.send({lastBid: NewBid.amount})
     }else{

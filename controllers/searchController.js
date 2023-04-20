@@ -1,7 +1,7 @@
 const {Listings} = require("../models/listingModel")
 const mongoose = require('mongoose')
 const fs = require('fs');
-const {newListingNotify} = require('./socketModule')
+const {notifyUser,newListingNotify} = require('./socketModule')
 const {Bids} = require("../models/bidModel");
 const {Users} = require("../models/userModel")
 const {tweet} = require("./twitterController")
@@ -212,6 +212,7 @@ const closeListing = async (req,res) =>{
         bidder.Orders.push(l)
         bidder.save()
         res.send({message : "sell completed"})
+        notifyUser(seller.userName + " accepted your "+b.amount+"$ bid on: "+l.name,bidder.email)
         newListingNotify()
     }
 }
