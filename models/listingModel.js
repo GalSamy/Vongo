@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const {userModel} = require("./userModel")
 
 const listingModel = new Schema({
-    listedBy: userModel, // String is shorthand for {type: String}
+    listedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // String is shorthand for {type: String}
     photo: String,
     albumId: String,
     name: String,
@@ -11,7 +11,7 @@ const listingModel = new Schema({
     lastBid: Number, //change to bid scheme
     acceptedBidDate:Date,
     acceptedBid:Number,
-    acceptedBidder:String,
+    acceptedBidder:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     artist: String,
     release: String,
     Bids: Array

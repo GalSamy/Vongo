@@ -2,6 +2,7 @@ const {Users} = require("../models/userModel")
 const {Listings} = require("../models/listingModel")
 
 const {locals} = require("express/lib/application");
+const {Bids} = require("../models/bidModel");
 require("dotenv").config()
 
 
@@ -78,6 +79,12 @@ const ordersToArray = (orders) => {
     return data;
   };
 const profileSells = async(req,res) =>{
+    let idToUserMap = new Map()
+    let users = await Users.find({})
+    for(let i = 0; i < users.length; i++){
+        idToUserMap.set(users[i]._id.toString(),users[i])
+        console.log(users[i]._id + "->" + users[i])
+    }
     //const sells =await Listings.find({closed : true, "listedBy.userName":res.locals.userName})
     const user = await Users.findOne({ userName: res.locals.userName }).select('Sells');
     const sells = user.Sells
@@ -88,12 +95,14 @@ const profileSells = async(req,res) =>{
         util:sellsToArray,
         User:res.locals,
         data:s,
-        Items:sells
+        Items:sells,
+        idToUserMap: idToUserMap,
+
     })
 
 }
 const profileOrders = async(req,res) =>{
-    const user = await Users.findOne({ userName: res.locals.userName }).select('Orders');
+    /*const user = await Users.findOne({ userName: res.locals.userName }).select('Orders');
     const orders = user.Orders
     console.log(orders + orders.length)
     s=[]
@@ -105,20 +114,44 @@ const profileOrders = async(req,res) =>{
         data:s,
         Items:orders
     })
+
+     */
 }
 const profileListings= async(req,res) =>{
     console.log(res.locals.userName)
-    let listings = await Listings.find({ "listedBy.userName": res.locals.userName })
+    let listings = await Listings.find({ "listedBy": res.locals._id })
     listings = listings.filter((listing)=> listing.closed==false)
     console.log("listings"+listings);
     s=[]
+    let map = new Map()
+    let userBidMap = new Map()
+
+    for (const l of listings) {
+        let arr = []
+        for (const b of l.Bids) {
+            let bid = await Bids.findById(b)
+            console.log("bid" + bid)
+            arr.push(bid)
+
+            userBidMap.set(bid._id, await Users.findById(bid.bidBy))
+            console.log(bid._id+ "->" +await Users.findById(bid.bidBy))
+        }
+
+        map.set(l._id, arr)
+        console.log("arr " + arr.length)
+    }
+
+
     res.render("../views/profileListings.ejs",{
         User:res.locals,
-        Items:listings
+        Items:listings,
+        ListingsBidsMap : map,
     })
 }
 
-
+async function IdToUser(id){
+    return Users.findById(id)
+}
 module.exports = {
     profile, profileSells,profileOrders,profileListings,sellsToArray
 }

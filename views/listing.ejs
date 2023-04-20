@@ -30,7 +30,7 @@
     <p class="h1 fw-bolder"><%=Album.title %></p>
     <p class="h2 "><%= Album.artist.name %>, <%= Album.release_date%></p>
     <p class="h3">Genre : <%= Genre.name%></p>
-    <p class="fs-4 ">Seller: <a class="clink" href="http://localhost:8080/users/<%=Item.listedBy._id %>"><%= Item.listedBy.userName%></a></p>
+    <p class="fs-4 ">Seller: <a class="clink" href="/users/<%=Item.listedBy %>"><%= seller.userName%></a></p>
     <p class="fs-4 d-inline" id="lastbid">Last Bid : <%= Item.lastBid%>$</p> <!-- change bid -->
         <!-- Button trigger modal -->
         <% if(locals.email) %>
@@ -40,7 +40,7 @@
         <button class="btn btn-danger" onclick="handleDelete(<%= JSON.stringify(Item._id)%>)">Delete Listing</button>
         <ul>
             <% for(let i = 0; i < Item.Bids.length; i++){%>
-            <li><%=Item.Bids[i].bidBy.userName%> put a bid of <%=Item.Bids[i].amount%>$</li>
+            <li><%=userBidMap.get(Bids[i]._id).userName%> put a bid of <%=Bids[i].amount%>$</li>
             <button class="btn btn-success" onclick="handleAccept(<%= JSON.stringify(Item._id)%>, <%= JSON.stringify(Item.Bids[i]._id)%>, <%= JSON.stringify(Item.Bids[i].date)%>)">Accept Bid</button>
             <%}%>
         </ul>

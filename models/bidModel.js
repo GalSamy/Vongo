@@ -4,9 +4,9 @@ const {userModel} = require("./userModel")
 const {listingModel} = require("./listingModel")
 
 const bidsModel = new Schema({
-    bidBy: userModel, // String is shorthand for {type: String}
+    bidBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // String is shorthand for {type: String}
     amount: Number,
-    listing: listingModel,
+    listing: {type: mongoose.Schema.Types.ObjectId, ref: 'Listings'},
     date:{type: Date ,Default:Date.now()}
 });
 

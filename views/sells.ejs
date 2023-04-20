@@ -33,7 +33,8 @@
             <p class="card-text fs-5"><%= Items[i].artist %>, <%= Items[i].release %></p>
             <ul>
                 <li>
-                    Bought By: <a class="link" href="/users/<%=Items[i].acceptedBidder%>"><%= Items[i].acceptedBidder %> </a>
+                    <%console.log(idToUserMap.get(Items[i].acceptedBidder.toString()))%>
+                    Bought By: <a class="link" href="/users/<%=Items[i].acceptedBidder%>"><%= idToUserMap.get(Items[i].acceptedBidder.toString()).userName %> </a>
                 </li>
                 <li>
                     Accepted Bid : <%= Items[i].acceptedBid %> $

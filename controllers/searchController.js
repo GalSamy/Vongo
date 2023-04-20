@@ -72,8 +72,23 @@ const listing =async (req,res) => {
         er = true;
         return res.status(404).send("Resource not found. Invalid ID")
     })
+
+
     console.log(er)
     if (!er) {
+        let map = new Map()
+        let userBidMap = new Map()
+        let seller = await Users.findById(l.listedBy)
+        let arr = []
+        for (const b of l.Bids) {
+            let bid = await Bids.findById(b)
+            console.log("bid" + bid)
+            arr.push(bid)
+            userBidMap.set(bid._id, await Users.findById(bid.bidBy))
+            console.log(bid._id+ "->" +await Users.findById(bid.bidBy))
+        }
+
+        console.log("arr " + arr.length)
         const name = l.albumId
         //console.log(name)
         let Album = await fetch("https://api.deezer.com/album/" + name)
@@ -89,7 +104,10 @@ const listing =async (req,res) => {
             Album: Album,
             Songs: Songs.data,
             Genre: Genre,
-            Email: res.locals.Email
+            Email: res.locals.Email,
+            Bids : arr,
+            userBidMap: userBidMap,
+            seller: seller
         });
     }
 }
@@ -173,10 +191,10 @@ const closeListing = async (req,res) =>{
         l.closed = true
         l.acceptedBid = b.amount
         l.acceptedBidDate = b.date
-        l.acceptedBidder = b.bidBy.userName
+        l.acceptedBidder =  b.bidBy
         l.save()
-        let seller = await Users.findById(l.listedBy._id)
-        let bidder = await Users.findById(b.bidBy._id)
+        let seller = await Users.findById(l.listedBy)
+        let bidder = await Users.findById(b.bidBy)
         seller.Sells.push(l)
         seller.save()
         bidder.Orders.push(l)

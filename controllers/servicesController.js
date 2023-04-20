@@ -74,7 +74,7 @@ const newBid = async (req,res) => {
         })
         await NewBid.save()
         console.log(NewBid.bidBy)
-        l.Bids.push(NewBid)
+        l.Bids.push(NewBid._id)
         l.lastBid = amount
         l.save()
         notifyUser("somechecks","ykvnkl2@gmail.com")

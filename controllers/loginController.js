@@ -46,7 +46,6 @@ const user_login_handler = async (req, res) => {
     console.log(error);
     return res.status(500).json({ message: "Error setting cookie" });
   }
-  
 
 };
 module.exports = {
