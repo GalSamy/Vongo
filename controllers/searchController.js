@@ -78,7 +78,7 @@ const listing =async (req,res) => {
     if (!er) {
         let map = new Map()
         let userBidMap = new Map()
-        let seller = await Users.findById(l.listedBy)
+        let seller = await Users.findById(l.listedBy.toString())
         let arr = []
         for (const b of l.Bids) {
             let bid = await Bids.findById(b)

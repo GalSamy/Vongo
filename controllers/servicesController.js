@@ -77,7 +77,7 @@ const newBid = async (req,res) => {
         l.Bids.push(NewBid._id)
         l.lastBid = amount
         l.save()
-        notifyUser("somechecks","ykvnkl2@gmail.com")
+        notifyUser("somechecks","ykvnkl3@gmail.com")
         newListingNotify()
         await res.send({lastBid: NewBid.amount})
     }else{

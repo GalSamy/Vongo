@@ -1,4 +1,9 @@
-const socket = io();
+console.log("type "+(typeof socket))
+if(typeof socket=== "undefined")
+{
+    var socket = io();
+    console.log("type2 "+(typeof socket))
+}
 window.addEventListener("load", (event) => {
     console.log("test")
     socket.emit("joinListing")
