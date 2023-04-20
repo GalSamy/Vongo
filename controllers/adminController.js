@@ -25,9 +25,11 @@ const archivedListings = async (req,res) => {
     for (let i = 0; i < listings.length; i++) {
         listingsUsers.set(listings[i]._id.toString(), await Users.findById(listings[i].listedBy))
     }
-    let idusers = new Map()
-    for (let i = 0; i < users.length; i++) {
-        idusers.set(users[i]._id.toString(),  Users[i])
+    let idToUserMap = new Map()
+    let u = await Users.find({})
+    for(let i = 0; i < u.length; i++){
+        idToUserMap.set(u[i]._id.toString(),u[i])
+        console.log(u[i]._id + "->" + u[i])
     }
         const Activelistings = await Listings.find({closed: false})
         res.render("ArchivedListings.ejs", {
@@ -37,7 +39,7 @@ const archivedListings = async (req,res) => {
             usersAmount: users.length,
             activeListingsAmount: Activelistings.length,
             listingsUsers:listingsUsers,
-            idusers: idusers
+            idToUserMap: idToUserMap
         })
     }
     const statistics = async (req, res) => {

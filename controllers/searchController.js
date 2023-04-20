@@ -78,14 +78,16 @@ const listing =async (req,res) => {
         er = true;
         return res.status(404).send("Resource not found. Invalid ID")
     })
-    console.log(er)
-    if (!er) {
+    console.log(l != null)
+    if (l != null) {
         let map = new Map()
         let userBidMap = new Map()
         let seller = await Users.findById(l.listedBy.toString())
         let arr = []
         for (const b of l.Bids) {
+
             let bid = await Bids.findById(b)
+            console.log("bid: "+bid)
             arr.push(bid)
             userBidMap.set(bid._id, await Users.findById(bid.bidBy))
         }

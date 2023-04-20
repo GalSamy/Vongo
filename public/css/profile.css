@@ -1,6 +1,10 @@
 *{
     font-family: 'Montserrat', sans-serif;
 }
+body{
+    background-color: #F2E2CE !important;
+}
+
 .activities{
     font-size: 0.5rem;
 }
