@@ -56,8 +56,13 @@ const postNewListing = async (req,res) =>{
 const search = async (req,res) => {
     const listings =await Listings.find({closed : false})
     let listingsUsers = new Map()
+    let populatedListing = []
     for(let i = 0; i < listings.length; i++){
         listingsUsers.set(listings[i]._id.toString(),await Users.findById(listings[i].listedBy))
+        populatedListing.push(listings[i].populate("listedBy"))
+        for (let j = 0; j < listings[i].Bids.length; j++){
+
+        }
     }
     if (res.locals.Email !== ""){
     res.render('../views/listings.ejs', {

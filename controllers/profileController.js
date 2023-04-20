@@ -103,9 +103,10 @@ const profileSells = async(req,res) =>{
 }
 const profileOrders = async(req,res) =>{
     let listings = await Listings.find({})
-    const user = await Users.findOne({ userName: res.locals.userName }).select('Orders');
-    const orders = user.Orders
-    console.log(orders + orders.length)
+    const user = await Users.findOne({ userName: res.locals.userName }).populate('Orders').exec();
+    const orders = user.Orders;
+
+    console.log("populated " + orders[0])
     s=[]
     if (orders.length)
         s = ordersToArray(orders)

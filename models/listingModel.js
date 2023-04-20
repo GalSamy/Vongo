@@ -14,7 +14,7 @@ const listingModel = new Schema({
     acceptedBidder:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     artist: String,
     release: String,
-    Bids: Array
+    Bids: [{type : mongoose.Schema.Types.ObjectId, ref: "Bids"}]
 });
 
 const Listings = mongoose.model("Listings", listingModel)
